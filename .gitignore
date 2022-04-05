@@ -1,0 +1,9 @@
+.idea
+build
+dist
+nbproject
+out
+src/*
+!src/basicgraphics
+!src/FinalProj
+piraha.jar
