@@ -16,6 +16,7 @@ public class Title extends BasicContainer {
         final ImageIcon backgroundImage = new ImageIcon(r.getPicture("title").resize(1.5f).getImage());
         JLabel mainPanel = Game.mainPanel(backgroundImage);
         mainPanel.setLayout(getLayout());
+        setPreferredSize(mainPanel.getPreferredSize());
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.gridx = 0;

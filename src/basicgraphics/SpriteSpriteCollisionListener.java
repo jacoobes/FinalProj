@@ -5,8 +5,6 @@
  */
 package basicgraphics;
 
-import lab04.LandingPad;
-import lab04.Rocket;
 
 /**
  *

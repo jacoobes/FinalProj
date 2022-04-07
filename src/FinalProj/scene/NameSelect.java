@@ -14,21 +14,22 @@ public class NameSelect extends BasicContainer {
         final ImageIcon backgroundImage = new ImageIcon(rl.getPicture("title").resize(1.5f).getImage());
         var mainPanel = Game.mainPanel(backgroundImage);
         mainPanel.setLayout(getLayout());
+        super.setPreferredSize(mainPanel.getPreferredSize());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridx = GridBagConstraints.CENTER;
+        gbc.gridy = GridBagConstraints.VERTICAL;
         gbc.insets.top = 0;
 
         var title = new JLabel("Select Name");
-        title.setFont(rl.getBitStrFont().deriveFont(100f));
+        title.setFont(rl.getBitStrFont().deriveFont(60f));
         title.setForeground(Color.LIGHT_GRAY);
         mainPanel.add(title, gbc);
 
         var field = new InputName(10, rl);
 
-        gbc.gridx = -1;
-        gbc.gridy = 1;
+        gbc.gridx = GridBagConstraints.CENTER;
+        gbc.gridy = GridBagConstraints.ABOVE_BASELINE;
 
         mainPanel.add(field, gbc);
         String[][] splashLayout = {

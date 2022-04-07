@@ -4,11 +4,13 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 
-public class TutorialParagraph extends JTextArea {
-    public TutorialParagraph(Font f)
+public class TextBox extends JTextArea {
+    public TextBox(Font f)
     {
         super(7,50);
+        setText("");
         setFont(f);
+        requestFocus();
         setEditable(false);
         setVisible(false);
         setForeground(Color.LIGHT_GRAY);

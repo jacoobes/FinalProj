@@ -17,6 +17,7 @@ public class InputName extends JTextField {
     {
         super(columns);
         setFont(rl.getBitStrFont().deriveFont(50f));
+        setPreferredSize(new Dimension(75,75));
         subject.addSubscriber(rl);
 
         addActionListener(e -> {
@@ -36,13 +37,14 @@ public class InputName extends JTextField {
                         //Notify resource loader a name has been selected
                         subject.notifySubs(new NameEvent(getText()));
                         // generate a new basic container with new scene
-                        BasicContainer bc2 = new Scene1(rl);
+                        BasicContainer bc1 = new Scene1(rl);
                         // add the basic container to the basic frame
-                        rl.getFrame().getContentPane().add(bc2, "Scene1");
+                        rl.getFrame().getContentPane().add(bc1, "Scene1");
                         //transition
+                        rl.getFrame().jf.pack();
+                        bc1.requestFocusInWindow();
                         Game.transitionScene((BasicContainer) grandparent, "Scene1");
                         //request focus
-                        bc2.requestFocus();
                     } else
                     {
                         setText("");

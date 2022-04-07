@@ -5,6 +5,21 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/FinalProj/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/src/basicflyer" />
+      <excludeFolder url="file://$MODULE_DIR$/src/basicshooter" />
+      <excludeFolder url="file://$MODULE_DIR$/src/beowulf" />
+      <excludeFolder url="file://$MODULE_DIR$/src/boardgame" />
+      <excludeFolder url="file://$MODULE_DIR$/src/lab04" />
+      <excludeFolder url="file://$MODULE_DIR$/src/langtonsant" />
+      <excludeFolder url="file://$MODULE_DIR$/src/lightsout" />
+      <excludeFolder url="file://$MODULE_DIR$/src/maze" />
+      <excludeFolder url="file://$MODULE_DIR$/src/prog" />
+      <excludeFolder url="file://$MODULE_DIR$/src/robosorter" />
+      <excludeFolder url="file://$MODULE_DIR$/src/trees" />
+      <excludeFolder url="file://$MODULE_DIR$/src/walkthedog" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/nbproject" />
     </content>
     <orderEntry type="jdk" jdkName="corretto-15" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />

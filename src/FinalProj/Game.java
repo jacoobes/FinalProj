@@ -7,10 +7,8 @@ import FinalProj.utils.ResourceLoader;
 import basicgraphics.*;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Game {
     static ResourceLoader resourceLoader = new ResourceLoader();
@@ -18,6 +16,7 @@ public class Game {
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         final var basicFrame = new BasicFrame("Guilt");
         basicFrame.jf.setIconImage(resourceLoader.getPicture("favico").getImage());
+        basicFrame.jf.setPreferredSize(new Dimension(1200,799));
         final var content = basicFrame.getContentPane();
 
         var cards = new CardLayout();
@@ -59,45 +58,4 @@ public class Game {
         var cardLayout = (CardLayout) parentContainer.getLayout();
         cardLayout.show(parentContainer, name);
     }
-    public static Task textTask(String message, JLabel jlabel)
-    {
-        AtomicInteger i = new AtomicInteger(0);
-        return new Task(1) {
-            @Override
-            public void run() {
-                jlabel.setText("");
-                Timer timer = new Timer(100, e -> {
-                    String labelText = jlabel.getText();
-                    labelText += message.charAt(i.getAndIncrement());
-                    jlabel.setText(labelText);
-                    if (i.get() >= message.length()) {
-                        setFinished();
-                        ((Timer)e.getSource()).stop();
-                    }
-                });
-                timer.start();
-            }
-        };
-    }
-    public static Task textTask(String message, JTextArea text)
-    {
-        AtomicInteger i = new AtomicInteger(0);
-        text.setText("");
-        return new Task(1) {
-            @Override
-            public void run() {
-                Timer timer = new Timer(100, e -> {
-                    String labelText = text.getText();
-                    labelText += message.charAt(i.getAndIncrement());
-                    text.setText(labelText);
-                    if (i.get() >= message.length() - 1) {
-                        setFinished();
-                        ((Timer)e.getSource()).stop();
-                    }
-                });
-                timer.start();
-            }
-        };
-    }
-
 }

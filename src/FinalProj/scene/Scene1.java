@@ -1,55 +1,56 @@
 package FinalProj.scene;
 
 import FinalProj.Game;
-import FinalProj.components.OnClick;
-import FinalProj.utils.OrderedTask;
-import FinalProj.utils.Poller;
-import FinalProj.utils.ResourceLoader;
-import FinalProj.utils.Subs;
+import FinalProj.components.OnSpace;
+import FinalProj.components.TextBox;
+import FinalProj.utils.*;
 import FinalProj.utils.events.Event;
 import basicgraphics.BasicContainer;
-import basicgraphics.Clock;
-import basicgraphics.Task;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
-import java.util.Vector;
+import static java.awt.GridBagConstraints.SOUTH;
 
 public class Scene1 extends BasicContainer implements Subs<Boolean> {
-    ResourceLoader rl;
-    Poller poller = new Poller(100);
+    private final JButton next = new JButton(">");
     public Scene1(ResourceLoader rl) {
         super();
-        this.rl = rl;
         final ImageIcon backgroundImage = new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage());
         var panel = Game.mainPanel(backgroundImage);
-
+        var tutFont = rl.getBitStrFont().deriveFont(20f);
         panel.setLayout(getLayout());
+        super.setPreferredSize(panel.getPreferredSize());
+        JTextArea textBox = new TextBox(tutFont);
+        textBox.setVisible(true);
+        var text = String.format("""
+               Help me...  Please... %s
+               I never meant it. I promise.
+               Help me out will you?
+               """, rl.getName());
+        var txtEmit = new TextEmitter(text)
+                .setJText(textBox)
+                .addSub(this);
 
+        var gbc = new GridBagConstraints();
+         gbc.gridy = SOUTH;
 
-        var textBox = new JLabel();
-            textBox.setFont(rl.getBitStrFont().deriveFont(20f));
-            textBox.setForeground(Color.LIGHT_GRAY);
-        var narration = new LinkedList<Task>();
-            narration.add(Game.textTask("Help me", textBox));
-            narration.add(Game.textTask("Please...", textBox));
-            narration.add(Game.textTask(rl.getName(), textBox));
-        var tasks = new OrderedTask(narration);
-        Clock.addTask(tasks);
-
-
-        panel.add(textBox);
-
-        var onClick = new OnClick(() -> {
-            poller.setTasks(tasks);
-            poller.addSub(this);
-            poller.start();
-            Clock.start(1500);
+        next.setVisible(false);
+        next.setFont(tutFont);
+        next.addActionListener(e -> {
+            BasicContainer scene2 = new Scene2(rl);
+            rl.getFrame().getContentPane().add(scene2, "Scene2");
+            //transition
+            Game.transitionScene(this, "Scene2");
+            //request focus
+            scene2.requestFocus();
         });
 
-        addMouseListener(onClick);
-
+        var narrate = new Timer(50, txtEmit);
+        panel.add(textBox);
+        panel.add(next, gbc);
+        var onSpace = new OnSpace(panel, narrate::start);
+        panel.requestFocusInWindow();
+        panel.addKeyListener(onSpace);
+        panel.setFocusable(true);
         String[][] splashLayout = {
                 {"Scene1"},
         };
@@ -61,14 +62,13 @@ public class Scene1 extends BasicContainer implements Subs<Boolean> {
     public void update(Event<Boolean> event) {
         if(event.getState())
         {
-            System.out.println("Scene1 has finished");
-            poller.stop();
-            BasicContainer scene2 = new Scene2(rl);
-            rl.getFrame().getContentPane().add(scene2, "Scene2");
-            //transition
-            Game.transitionScene(this, "Scene2");
-            //request focus
-            scene2.requestFocus();
+            var showButton = new Timer(2000, e -> {
+                System.out.println("Scene1 has finished");
+                next.setVisible(true);
+            });
+            showButton.setRepeats(false);
+            showButton.start();
+
         }
     }
 
