@@ -29,8 +29,8 @@ public class Title extends BasicContainer {
         mainPanel.add(title);
 
         var jButton = new JButton("Start");
+        jButton.setFocusable(true);
         jButton.setFont(r.getBitStrFont().deriveFont(50f));
-
         jButton.addActionListener(e -> Game.transitionScene(this, "Tutorial"));
 
         mainPanel.add(jButton, gbc);

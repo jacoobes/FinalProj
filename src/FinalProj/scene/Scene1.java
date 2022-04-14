@@ -40,17 +40,14 @@ public class Scene1 extends BasicContainer implements Subs<Boolean> {
             rl.getFrame().getContentPane().add(scene2, "Scene2");
             //transition
             Game.transitionScene(this, "Scene2");
-            //request focus
             scene2.requestFocus();
+            rl.getFrame().jf.pack();
         });
 
         var narrate = new Timer(50, txtEmit);
+        narrate.start();
         panel.add(textBox);
         panel.add(next, gbc);
-        var onSpace = new OnSpace(panel, narrate::start);
-        panel.requestFocusInWindow();
-        panel.addKeyListener(onSpace);
-        panel.setFocusable(true);
         String[][] splashLayout = {
                 {"Scene1"},
         };

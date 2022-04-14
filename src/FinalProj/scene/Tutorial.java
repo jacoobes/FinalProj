@@ -35,11 +35,13 @@ public class Tutorial extends BasicContainer implements Subs<Boolean> {
         gbc.gridy = SOUTH;
         startGame.setVisible(false);
         startGame.setFont(tutFont);
-
+        //"""
+        //                For cinematic scenes, click once and let it narrate.
+        //                For choice boxes, click on one of the four options.
+        //                Every choice will affect the ending of the game."""
         String text = """
-                For cinematic scenes, click once and let it narrate.
-                For choice boxes, click on one of the four options.
-                Every choice will affect the ending of the game.""";
+        placeholder
+        """;
 
         var txtEmitter = new TextEmitter(text)
             .setJText(tutorialParagraph)
@@ -72,7 +74,6 @@ public class Tutorial extends BasicContainer implements Subs<Boolean> {
             startGame.setVisible(true);
             startGame.addActionListener( e -> {
                 Game.transitionScene(this, "Name Select");
-                getParent().getComponent(1).requestFocus();
                 rl.getFrame().jf.pack();
             });
         }

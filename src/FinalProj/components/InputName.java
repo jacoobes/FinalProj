@@ -42,9 +42,8 @@ public class InputName extends JTextField {
                         rl.getFrame().getContentPane().add(bc1, "Scene1");
                         //transition
                         rl.getFrame().jf.pack();
-                        bc1.requestFocusInWindow();
                         Game.transitionScene((BasicContainer) grandparent, "Scene1");
-                        //request focus
+                        bc1.requestFocus();
                     } else
                     {
                         setText("");

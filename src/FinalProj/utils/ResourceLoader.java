@@ -40,6 +40,8 @@ public class ResourceLoader implements Subs<String> {
         ImageMap.put("favico", favico);
         var tutorial = new Picture("tutorial.png");
         ImageMap.put("tutorial", tutorial);
+        var scene2 = new Picture("scene2.png");
+        ImageMap.put("scene2",scene2);
 
     }
     public void setBf(BasicFrame bf) { this.dad = bf; }

@@ -12,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Game {
     static ResourceLoader resourceLoader = new ResourceLoader();
-
+    static int i = 1;
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         final var basicFrame = new BasicFrame("Guilt");
         basicFrame.jf.setIconImage(resourceLoader.getPicture("favico").getImage());
