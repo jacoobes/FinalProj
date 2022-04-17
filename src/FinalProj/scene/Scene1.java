@@ -41,7 +41,6 @@ public class Scene1 extends BasicContainer implements Subs<Boolean> {
             //transition
             Game.transitionScene(this, "Scene2");
             scene2.requestFocus();
-            rl.getFrame().jf.pack();
         });
 
         var narrate = new Timer(50, txtEmit);

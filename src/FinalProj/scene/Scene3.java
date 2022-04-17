@@ -13,14 +13,14 @@ import java.awt.*;
 
 import static java.awt.GridBagConstraints.SOUTH;
 
-public class Scene2 extends BasicContainer implements Subs<Boolean> {
+public class Scene3 extends BasicContainer implements Subs<Boolean> {
     ResourceLoader rl;
     private final JButton next = new JButton(">");
-    public Scene2(ResourceLoader rl)
+    public Scene3(ResourceLoader rl)
     {
         super();
         this.rl = rl;
-         final ImageIcon backgroundImage = new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage());
+        final ImageIcon backgroundImage = new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage());
         var panel = Game.mainPanel(backgroundImage);
         var tutFont = rl.getBitStrFont().deriveFont(20f);
         panel.setLayout(getLayout());
@@ -28,11 +28,14 @@ public class Scene2 extends BasicContainer implements Subs<Boolean> {
         super.setPreferredSize(panel.getPreferredSize());
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
-
-        var text = """
-            Don't leave me. We made a promise, remember?
-            Help me.... I don't want to die here.
-            """;
+        var text = String.format("""
+            A shout from a hill.
+            You look at the dark figurine crying for help.
+            You take a step back, looking the opposite direction.
+            
+            "Please... %s"
+            The shouting gets closer, and you run.
+            """,rl.getName());
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
@@ -40,7 +43,6 @@ public class Scene2 extends BasicContainer implements Subs<Boolean> {
         var gbc = new GridBagConstraints();
         gbc.gridy = SOUTH;
 
-        next.setVisible(false);
         next.setFont(tutFont);
         next.addActionListener(e -> {
             BasicContainer scene3 = new Scene3(rl);
@@ -53,13 +55,13 @@ public class Scene2 extends BasicContainer implements Subs<Boolean> {
 
         var narrate = new Timer(75, txtEmit);
         panel.add(textBox);
-        panel.add(next, gbc);
+        //panel.add(next, gbc);
         narrate.start();
         String[][] splashLayout = {
-                {"Scene2"},
+                {"Scene3"},
         };
         setStringLayout(splashLayout);
-        add("Scene2", panel);
+        add("Scene3", panel);
 
     }
 
