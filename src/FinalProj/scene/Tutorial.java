@@ -2,6 +2,7 @@ package FinalProj.scene;
 
 import FinalProj.Game;
 import FinalProj.components.TextBox;
+import FinalProj.utils.Publisher;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.Subs;
 import FinalProj.utils.TextEmitter;
@@ -67,7 +68,7 @@ public class Tutorial extends BasicContainer implements Subs<Boolean> {
     }
 
     @Override
-    public void update(Event<Boolean> event) {
+    public void update(Event<Boolean> event, Publisher<Boolean> p) {
         if(event.getState())
         {
             System.out.println("Finished Tutorial");

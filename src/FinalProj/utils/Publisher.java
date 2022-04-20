@@ -11,7 +11,7 @@ public class Publisher<T> {
     {
         for ( Subs<T> s : subscribers)
         {
-            s.update(e);
+            s.update(e,this);
         }
     }
     public void addSubscriber(Subs<T> s)

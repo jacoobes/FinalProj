@@ -5,6 +5,7 @@ import basicgraphics.BasicFrame;
 import basicgraphics.images.Picture;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -42,6 +43,8 @@ public class ResourceLoader implements Subs<String> {
         ImageMap.put("tutorial", tutorial);
         var scene2 = new Picture("scene2.png");
         ImageMap.put("scene2",scene2);
+        var blackground = new BufferedImage(1200,800, BufferedImage.TYPE_BYTE_GRAY);
+        ImageMap.put("blackground", new Picture(blackground));
 
     }
     public void setBf(BasicFrame bf) { this.dad = bf; }
@@ -54,7 +57,7 @@ public class ResourceLoader implements Subs<String> {
     }
 
     @Override
-    public void update(Event<String> event) {
+    public void update(Event<String> event, Publisher<String> p) {
         String name = event.getState();
         System.out.printf("Set the player's name to %s\n", name);
         inputName = name;

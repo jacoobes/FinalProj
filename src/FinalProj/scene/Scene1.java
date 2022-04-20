@@ -33,7 +33,8 @@ public class Scene1 extends BasicContainer implements Subs<Boolean> {
         var gbc = new GridBagConstraints();
          gbc.gridy = SOUTH;
 
-        next.setVisible(false);
+      // make sure to uncomment in game
+     //   next.setVisible(false);
         next.setFont(tutFont);
         next.addActionListener(e -> {
             BasicContainer scene2 = new Scene2(rl);
@@ -55,7 +56,7 @@ public class Scene1 extends BasicContainer implements Subs<Boolean> {
     }
 
     @Override
-    public void update(Event<Boolean> event) {
+    public void update(Event<Boolean> event, Publisher<Boolean> p) {
         if(event.getState())
         {
             var showButton = new Timer(2000, e -> {

@@ -2,6 +2,7 @@ package FinalProj.scene;
 
 import FinalProj.Game;
 import FinalProj.components.TextBox;
+import FinalProj.utils.Publisher;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.Subs;
 import FinalProj.utils.TextEmitter;
@@ -39,8 +40,8 @@ public class Scene2 extends BasicContainer implements Subs<Boolean> {
 
         var gbc = new GridBagConstraints();
         gbc.gridy = SOUTH;
-
-        next.setVisible(false);
+        // make sure to uncomment in game
+        //next.setVisible(false);
         next.setFont(tutFont);
         next.addActionListener(e -> {
             BasicContainer scene3 = new Scene3(rl);
@@ -64,7 +65,7 @@ public class Scene2 extends BasicContainer implements Subs<Boolean> {
     }
 
     @Override
-    public void update(Event<Boolean> event) {
+    public void update(Event<Boolean> event, Publisher<Boolean> p) {
         if(event.getState())
         {
             var showButton = new Timer(2000, e -> {
