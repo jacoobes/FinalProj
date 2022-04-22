@@ -57,7 +57,7 @@ public class ResourceLoader implements Subs<String> {
     }
 
     @Override
-    public void update(Event<String> event, Publisher<String> p) {
+    public void update(Event<String> event) {
         String name = event.getState();
         System.out.printf("Set the player's name to %s\n", name);
         inputName = name;

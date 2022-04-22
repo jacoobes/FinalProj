@@ -68,7 +68,7 @@ public class Tutorial extends BasicContainer implements Subs<Boolean> {
     }
 
     @Override
-    public void update(Event<Boolean> event, Publisher<Boolean> p) {
+    public void update(Event<Boolean> event) {
         if(event.getState())
         {
             System.out.println("Finished Tutorial");

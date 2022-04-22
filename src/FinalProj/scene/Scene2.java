@@ -65,7 +65,7 @@ public class Scene2 extends BasicContainer implements Subs<Boolean> {
     }
 
     @Override
-    public void update(Event<Boolean> event, Publisher<Boolean> p) {
+    public void update(Event<Boolean> event) {
         if(event.getState())
         {
             var showButton = new Timer(2000, e -> {
