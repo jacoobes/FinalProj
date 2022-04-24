@@ -5,15 +5,23 @@ import FinalProj.components.TextBox;
 import FinalProj.utils.*;
 import FinalProj.utils.events.Event;
 import basicgraphics.BasicContainer;
+
 import javax.swing.*;
 import java.awt.*;
 import static java.awt.GridBagConstraints.SOUTH;
 
 public class Scene1 extends SceneAlpha {
     private final JButton next = new JButton(">");
-
+    private final SoundPlayer sp = super.resourceLoader.getSoundPlayer();
     public Scene1(ResourceLoader rl) {
+
         super(rl, new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage()));
+        try {
+            sp.loop("brown",-1);
+            sp.loop("die",10);
+        } catch (Throwable e) {
+            System.out.println(e);
+        }
         var tutFont = getGameFont(20f);
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
@@ -39,7 +47,6 @@ public class Scene1 extends SceneAlpha {
             Game.transitionScene(this, "Scene2");
             scene2.requestFocus();
         });
-
         var narrate = new Timer(50, txtEmit);
         narrate.start();
         getMainBGround().add(textBox);
@@ -56,7 +63,6 @@ public class Scene1 extends SceneAlpha {
             });
             showButton.setRepeats(false);
             showButton.start();
-
         }
     }
 

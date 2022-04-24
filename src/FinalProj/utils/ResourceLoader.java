@@ -3,7 +3,9 @@ package FinalProj.utils;
 import FinalProj.utils.events.Event;
 import basicgraphics.BasicFrame;
 import basicgraphics.images.Picture;
+import basicgraphics.sounds.ReusableClip;
 
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,6 +17,7 @@ public class ResourceLoader implements Subs<String> {
     private Font bitStr;
     private String inputName;
     private BasicFrame dad;
+    private final SoundPlayer sp = new SoundPlayer();
     public ResourceLoader() {
 
         //Loading BitStream
@@ -46,6 +49,13 @@ public class ResourceLoader implements Subs<String> {
         var blackground = new BufferedImage(1200,800, BufferedImage.TYPE_BYTE_GRAY);
         ImageMap.put("blackground", new Picture(blackground));
 
+        try {
+          sp.newSound("brown", "audiocheck.net_brownnoise.wav");
+          sp.newSound("die", "die.wav");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
     public void setBf(BasicFrame bf) { this.dad = bf; }
     public BasicFrame getFrame () { return dad; }
@@ -55,7 +65,7 @@ public class ResourceLoader implements Subs<String> {
     public Picture getPicture(String key) {
         return ImageMap.get(key);
     }
-
+    public SoundPlayer getSoundPlayer() { return sp; }
     @Override
     public void update(Event<String> event) {
         String name = event.getState();
