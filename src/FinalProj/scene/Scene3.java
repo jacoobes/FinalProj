@@ -14,19 +14,13 @@ import java.awt.*;
 
 import static java.awt.GridBagConstraints.SOUTH;
 
-public class Scene3 extends BasicContainer implements Subs<Boolean> {
-    ResourceLoader rl;
+public class Scene3 extends SceneAlpha {
     private final JButton next = new JButton(">");
     public Scene3(ResourceLoader rl)
     {
-        super();
-        this.rl = rl;
-        final ImageIcon backgroundImage = new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage());
-        var panel = Game.mainPanel(backgroundImage);
-        var tutFont = rl.getBitStrFont().deriveFont(20f);
-        panel.setLayout(getLayout());
+        super(rl, new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage()));
+        var tutFont = getGameFont(20f);
 
-        super.setPreferredSize(panel.getPreferredSize());
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
         var text = String.format("""
@@ -55,15 +49,9 @@ public class Scene3 extends BasicContainer implements Subs<Boolean> {
         });
 
         var narrate = new Timer(75, txtEmit);
-        panel.add(textBox);
-        panel.add(next, gbc);
+        getMainBGround().add(textBox);
+        getMainBGround().add(next, gbc);
         narrate.start();
-        String[][] splashLayout = {
-                {"Scene3"},
-        };
-        setStringLayout(splashLayout);
-        add("Scene3", panel);
-
     }
 
     @Override

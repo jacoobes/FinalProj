@@ -1,7 +1,6 @@
 package FinalProj.scene;
 
 import FinalProj.Game;
-import FinalProj.components.OnSpace;
 import FinalProj.components.TextBox;
 import FinalProj.utils.*;
 import FinalProj.utils.events.Event;
@@ -10,15 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import static java.awt.GridBagConstraints.SOUTH;
 
-public class Scene1 extends BasicContainer implements Subs<Boolean> {
+public class Scene1 extends SceneAlpha {
     private final JButton next = new JButton(">");
+
     public Scene1(ResourceLoader rl) {
-        super();
-        final ImageIcon backgroundImage = new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage());
-        var panel = Game.mainPanel(backgroundImage);
-        var tutFont = rl.getBitStrFont().deriveFont(20f);
-        panel.setLayout(getLayout());
-        super.setPreferredSize(panel.getPreferredSize());
+        super(rl, new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage()));
+        var tutFont = getGameFont(20f);
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
         var text = String.format("""
@@ -46,13 +42,8 @@ public class Scene1 extends BasicContainer implements Subs<Boolean> {
 
         var narrate = new Timer(50, txtEmit);
         narrate.start();
-        panel.add(textBox);
-        panel.add(next, gbc);
-        String[][] splashLayout = {
-                {"Scene1"},
-        };
-        setStringLayout(splashLayout);
-        add("Scene1", panel);
+        getMainBGround().add(textBox);
+        getMainBGround().add(next, gbc);
     }
 
     @Override

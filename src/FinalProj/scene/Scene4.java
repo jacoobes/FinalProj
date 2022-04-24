@@ -2,35 +2,25 @@ package FinalProj.scene;
 
 import FinalProj.Game;
 import FinalProj.components.TextBox;
-import FinalProj.utils.Publisher;
 import FinalProj.utils.ResourceLoader;
-import FinalProj.utils.Subs;
 import FinalProj.utils.TextEmitter;
 import FinalProj.utils.events.Event;
-import FinalProj.utils.events.TaskFinishedEvent;
 import basicgraphics.BasicContainer;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Stack;
-import java.util.Vector;
-
 import static java.awt.GridBagConstraints.CENTER;
 import static java.awt.GridBagConstraints.SOUTH;
 
 //Black scene and transition to game
-public class Scene4 extends BasicContainer implements Subs<Boolean> {
+public class Scene4 extends SceneAlpha {
     private final JButton next = new JButton(">");
     public Scene4(ResourceLoader rl)
     {
-        super();
-        final ImageIcon backgroundImage = new ImageIcon(rl.getPicture("blackground").getImage());
-        var panel = Game.mainPanel(backgroundImage);
+        super(rl,new ImageIcon(rl.getPicture("blackground").getImage()) );
         var tutFont = rl.getBitStrFont().deriveFont(20f);
-        panel.setLayout(getLayout());
+        getMainBGround().setLayout(getLayout());
 
-        super.setPreferredSize(panel.getPreferredSize());
+        super.setPreferredSize(getMainBGround().getPreferredSize());
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
         var text ="      I couldn't help her. I swear. \n"
@@ -46,25 +36,20 @@ public class Scene4 extends BasicContainer implements Subs<Boolean> {
         next.setFont(tutFont);
         next.setVisible(false);
         next.addActionListener(e -> {
-            BasicContainer scene4 = new Scene4(rl);
-            rl.getFrame().getContentPane().add(scene4, "Scene4");
+            BasicContainer scene5 = new Scene5(rl);
+            rl.getFrame().getContentPane().add(scene5, "Scene5");
             //transition
-            Game.transitionScene(this, "Scene4");
+            Game.transitionScene(this, "Scene5");
             //request focus
-            scene4.requestFocus();
+            scene5.requestFocus();
         });
 
         var narrate = new Timer(75, txtEmit);
         var gbcTxtBox = new GridBagConstraints();
         gbcTxtBox.gridx = CENTER;
-        panel.add(textBox, gbcTxtBox);
-        panel.add(next, gbc);
+        getMainBGround().add(textBox, gbcTxtBox);
+        getMainBGround().add(next, gbc);
         narrate.start();
-        String[][] splashLayout = {
-                {"Scene4"},
-        };
-        setStringLayout(splashLayout);
-        add("Scene4", panel);
     }
 
     @Override

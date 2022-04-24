@@ -21,7 +21,7 @@ public abstract class SceneAlpha extends BasicContainer implements Subs<Boolean>
     {
         super();
         this.resourceLoader = rl;
-        this.gameFont = rl.getBitStrFont().deriveFont(20f);
+        this.gameFont = rl.getBitStrFont();
         var mainPanel = Game.mainPanel(background);
         mainPanel.setLayout(getLayout());
         mainBGround = mainPanel;
@@ -34,4 +34,10 @@ public abstract class SceneAlpha extends BasicContainer implements Subs<Boolean>
     }
     @Override
     public abstract void update(Event<Boolean> event);
+
+    public Font getGameFont(float size) {
+        return gameFont.deriveFont(size);
+    }
+
+    public JLabel getMainBGround() { return mainBGround; }
 }
