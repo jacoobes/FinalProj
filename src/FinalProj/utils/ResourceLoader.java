@@ -13,10 +13,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ResourceLoader implements Subs<String> {
+    private YamlParser.Data data;
     private final HashMap<String, Picture> ImageMap = new HashMap<>();
-    private int guilt = 0;
     private Font bitStr;
-    private String inputName;
     private BasicFrame dad;
     private final SoundPlayer sp = new SoundPlayer();
     public ResourceLoader() {
@@ -71,18 +70,15 @@ public class ResourceLoader implements Subs<String> {
     public void update(Event<String> event) {
         String name = event.getState();
         System.out.printf("Set the player's name to %s\n", name);
-        inputName = name;
+        this.data.profile = name;
     }
 
-    public int getGuilt() {
-        return guilt;
-    }
     public void addGuilt(int guilt) {
-        this.guilt += guilt;
+        this.data.guilt += guilt;
     }
 
     public String getName()
     {
-        return inputName;
+        return this.data.profile;
     }
 }
