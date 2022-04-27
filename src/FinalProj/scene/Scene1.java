@@ -12,13 +12,13 @@ import static java.awt.GridBagConstraints.SOUTH;
 
 public class Scene1 extends SceneAlpha {
     private final JButton next = new JButton(">");
-    private final SoundPlayer sp = super.resourceLoader.getSoundPlayer();
+
     public Scene1(ResourceLoader rl) {
 
         super(rl, new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage()));
         try {
             sp.loop("brown",-1);
-            sp.loop("die",10);
+            sp.setVolume("brown", .3f);
         } catch (Throwable e) {
             System.out.println(e);
         }
@@ -30,6 +30,7 @@ public class Scene1 extends SceneAlpha {
                I never meant it. I promise.
                Help me out will you?
                """, rl.getName());
+
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
@@ -41,6 +42,7 @@ public class Scene1 extends SceneAlpha {
      //   next.setVisible(false);
         next.setFont(tutFont);
         next.addActionListener(e -> {
+            sp.stop("type");
             BasicContainer scene2 = new Scene2(rl);
             rl.getFrame().getContentPane().add(scene2, "Scene2");
             //transition
@@ -49,12 +51,21 @@ public class Scene1 extends SceneAlpha {
         });
         var narrate = new Timer(50, txtEmit);
         narrate.start();
+        try {
+         sp.loop("type",4);
+        } catch (Throwable e)
+        {
+            System.out.println(e);
+        }
+
         getMainBGround().add(textBox);
         getMainBGround().add(next, gbc);
+        rl.getFrame().jf.pack();
     }
 
     @Override
     public void update(Event<Boolean> event) {
+        sp.stop("type");
         if(event.getState())
         {
             var showButton = new Timer(2000, e -> {

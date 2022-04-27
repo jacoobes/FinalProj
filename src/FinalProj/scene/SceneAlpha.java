@@ -3,6 +3,7 @@ package FinalProj.scene;
 import FinalProj.Game;
 import FinalProj.utils.Publisher;
 import FinalProj.utils.ResourceLoader;
+import FinalProj.utils.SoundPlayer;
 import FinalProj.utils.Subs;
 import FinalProj.utils.events.Event;
 import basicgraphics.BasicContainer;
@@ -14,6 +15,7 @@ public abstract class SceneAlpha extends BasicContainer implements Subs<Boolean>
     protected ResourceLoader resourceLoader;
     protected Font gameFont;
     protected JLabel mainBGround;
+    protected SoundPlayer sp;
     protected SceneAlpha(
             ResourceLoader rl,
             ImageIcon background
@@ -22,6 +24,7 @@ public abstract class SceneAlpha extends BasicContainer implements Subs<Boolean>
         super();
         this.resourceLoader = rl;
         this.gameFont = rl.getBitStrFont();
+        sp = rl.getSoundPlayer();
         var mainPanel = Game.mainPanel(background);
         mainPanel.setLayout(getLayout());
         mainBGround = mainPanel;

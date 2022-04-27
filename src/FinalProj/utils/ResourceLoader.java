@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class ResourceLoader implements Subs<String> {
     private final HashMap<String, Picture> ImageMap = new HashMap<>();
+    private int guilt = 0;
     private Font bitStr;
     private String inputName;
     private BasicFrame dad;
@@ -50,8 +51,8 @@ public class ResourceLoader implements Subs<String> {
         ImageMap.put("blackground", new Picture(blackground));
 
         try {
-          sp.newSound("brown", "audiocheck.net_brownnoise.wav");
-          sp.newSound("die", "die.wav");
+          sp.newSound("brown", "Super Deep Brown Noise (1 Hour).wav");
+          sp.newSound("type", "typewriter-1.wav");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -73,6 +74,12 @@ public class ResourceLoader implements Subs<String> {
         inputName = name;
     }
 
+    public int getGuilt() {
+        return guilt;
+    }
+    public void addGuilt(int guilt) {
+        this.guilt += guilt;
+    }
 
     public String getName()
     {

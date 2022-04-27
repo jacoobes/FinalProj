@@ -2,10 +2,7 @@ package FinalProj.scene;
 
 import FinalProj.Game;
 import FinalProj.components.TextBox;
-import FinalProj.utils.Publisher;
-import FinalProj.utils.ResourceLoader;
-import FinalProj.utils.Subs;
-import FinalProj.utils.TextEmitter;
+import FinalProj.utils.*;
 import FinalProj.utils.events.Event;
 import basicgraphics.BasicContainer;
 
@@ -37,6 +34,7 @@ public class Scene2 extends SceneAlpha {
         //next.setVisible(false);
         next.setFont(tutFont);
         next.addActionListener(e -> {
+            sp.stop("type");
             BasicContainer scene3 = new Scene3(rl);
             rl.getFrame().getContentPane().add(scene3, "Scene3");
             //transition
@@ -44,17 +42,24 @@ public class Scene2 extends SceneAlpha {
             //request focus
             scene3.requestFocus();
         });
-
+        try {
+            sp.loop("type",-1);
+        } catch (Throwable e)
+        {
+            System.out.println(e);
+        }
         var narrate = new Timer(75, txtEmit);
         getMainBGround().add(textBox);
         getMainBGround().add(next, gbc);
         narrate.start();
+        rl.getFrame().jf.pack();
     }
 
     @Override
     public void update(Event<Boolean> event) {
         if(event.getState())
         {
+            sp.stop("type");
             var showButton = new Timer(2000, e -> {
                 System.out.println("Scene2 has finished");
                 next.setVisible(true);

@@ -36,6 +36,7 @@ public class Scene4 extends SceneAlpha {
         next.setFont(tutFont);
         next.setVisible(false);
         next.addActionListener(e -> {
+            sp.stop("type");
             BasicContainer scene5 = new Scene5(rl);
             rl.getFrame().getContentPane().add(scene5, "Scene5");
             //transition
@@ -50,6 +51,13 @@ public class Scene4 extends SceneAlpha {
         getMainBGround().add(textBox, gbcTxtBox);
         getMainBGround().add(next, gbc);
         narrate.start();
+        rl.getFrame().jf.pack();
+        try {
+            sp.loop("type",-1);
+        } catch ( Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     @Override
@@ -57,6 +65,7 @@ public class Scene4 extends SceneAlpha {
 
         if(event.getState())
         {
+            sp.stop("type");
             System.out.println("Scene 4 finished");
             next.setVisible(true);
         }
