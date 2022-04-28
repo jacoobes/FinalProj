@@ -1,6 +1,4 @@
 package FinalProj.utils.events;
-
-import FinalProj.utils.Subs;
 import FinalProj.utils.YamlParser;
 
 public class CurrentProfileSelectEvent implements Event<YamlParser.Data> {

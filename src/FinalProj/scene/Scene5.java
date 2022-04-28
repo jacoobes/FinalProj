@@ -2,7 +2,6 @@ package FinalProj.scene;
 
 import FinalProj.Game;
 import FinalProj.components.ChoiceButton;
-import FinalProj.components.TextBox;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.TextEmitter;
 import FinalProj.utils.events.Event;
@@ -13,12 +12,11 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
-import java.util.Arrays;
 
 public class Scene5 extends SceneAlpha {
     private final ChoiceButton c1 = new ChoiceButton("Look back").addFont(getGameFont(20f));
     private final ChoiceButton c2 = new ChoiceButton("Ignore it").addFont(getGameFont(20f));
-    Scene5(ResourceLoader rl) {
+    public Scene5(ResourceLoader rl) {
         super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
@@ -41,13 +39,13 @@ public class Scene5 extends SceneAlpha {
                 .addSub(this);
 
         c1.addActionListener(e -> {
-            rl.addGuilt(10);
+            rl.getMyProfile().addGuilt(10);
             Game.transitionScene(this, Scene6.class.getName());
             BasicContainer scene6 = new Scene6.LookBack(rl);
             rl.getFrame().getContentPane().add(scene6, Scene6.class.getName());
         });
         c2.addActionListener(e -> {
-            rl.addGuilt(20);
+            rl.getMyProfile().addGuilt(20);
             Game.transitionScene(this, Scene6.class.getName());
             BasicContainer scene6 = new Scene6.Ignore(rl);
             rl.getFrame().getContentPane().add(scene6, Scene6.class.getName());

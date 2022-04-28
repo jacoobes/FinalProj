@@ -1,7 +1,6 @@
 package FinalProj.components;
 
 import FinalProj.Game;
-import FinalProj.scene.Scene1;
 import FinalProj.scene.Tutorial;
 import FinalProj.utils.Publisher;
 import FinalProj.utils.ResourceLoader;
@@ -31,8 +30,12 @@ public class InputName extends JTextField {
                     JOptionPane.showMessageDialog(getParent(), "This name cannot be used");
                 } else
                 {
-                    var confirmDialog = JOptionPane.showConfirmDialog(getParent(),
-                            String.format("Are you sure you want to use the name %s?", getText()));
+                    var confirmDialog = JOptionPane.showConfirmDialog(
+                            getParent(),
+                            String.format("Are you sure you want to use the name %s?", getText()),
+                            null,
+                            JOptionPane.YES_NO_OPTION
+                    );
                     if (confirmDialog == 0)
                     {
                         //Notify resource loader a name has been selected

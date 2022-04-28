@@ -23,7 +23,7 @@ public class Scene6 {
 
     public static class LookBack extends SceneAlpha {
         public LookBack(ResourceLoader rl) {
-            super(rl, new ImageIcon(rl.getPicture("blackground").resize(1.5f).getImage()));
+            super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
         }
 
         @Override

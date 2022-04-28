@@ -1,7 +1,6 @@
 package FinalProj.scene;
 
 import FinalProj.Game;
-import FinalProj.utils.Publisher;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.SoundPlayer;
 import FinalProj.utils.Subs;
@@ -16,11 +15,10 @@ public abstract class SceneAlpha extends BasicContainer implements Subs<Boolean>
     protected Font gameFont;
     protected JLabel mainBGround;
     protected SoundPlayer sp;
-    protected SceneAlpha(
+    public SceneAlpha(
             ResourceLoader rl,
             ImageIcon background
-    )
-    {
+    ) {
         super();
         this.resourceLoader = rl;
         this.gameFont = rl.getBitStrFont();

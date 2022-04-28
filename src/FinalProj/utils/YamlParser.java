@@ -21,6 +21,7 @@ public class YamlParser {
         public String savedScene;
         public int guilt = 0;
         public int resolve = 0;
+        public String _fp;
 
         @Override
         public String toString() {
@@ -29,7 +30,16 @@ public class YamlParser {
                     ", savedScene='" + savedScene + '\'' +
                     ", guilt=" + guilt +
                     ", resolve=" + resolve +
+                    ", _fp=" + _fp +
                     '}';
+        }
+
+        public void addGuilt(int guilt) {
+            this.guilt += guilt;
+        }
+
+        public void addResolve(int resolve) {
+            this.resolve += resolve;
         }
     }
 
@@ -58,6 +68,10 @@ public class YamlParser {
                      return null;
                  }).collect(Collectors.toList());
 
+
+    }
+    public void dump(Data d) throws IOException {
+        yamlizer.dump(d, new FileWriter("database/profile2.yaml"));
 
     }
 
