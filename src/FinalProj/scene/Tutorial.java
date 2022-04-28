@@ -37,8 +37,8 @@ public class Tutorial extends BasicContainer implements Subs<Boolean> {
         startGame.setVisible(false);
         startGame.setFont(tutFont);
         //"""
-        //                For cinematic scenes, click once and let it narrate.
-        //                For choice boxes, click on one of the four options.
+        //                For cinematic scenes, wait for the button to appear.
+        //                For choice boxes, click one of the buttons.
         //                Every choice will affect the ending of the game."""
         String text = """
         placeholder
@@ -74,7 +74,9 @@ public class Tutorial extends BasicContainer implements Subs<Boolean> {
             System.out.println("Finished Tutorial");
             startGame.setVisible(true);
             startGame.addActionListener( e -> {
-                Game.transitionScene(this, "Name Select");
+                Scene1 sc = new Scene1(rl);
+                rl.getFrame().getContentPane().add(sc, Scene1.class.getName());
+                Game.transitionScene(this, Scene1.class.getName());
                 rl.getFrame().jf.pack();
             });
         }

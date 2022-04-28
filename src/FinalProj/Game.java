@@ -1,6 +1,7 @@
 package FinalProj;
 
 import FinalProj.scene.NameSelect;
+import FinalProj.scene.ProfileSelection;
 import FinalProj.scene.Title;
 import FinalProj.scene.Tutorial;
 import FinalProj.utils.ResourceLoader;
@@ -22,13 +23,16 @@ public class Game {
 
         resourceLoader.setBf(basicFrame);
         final BasicContainer bc1 = new Title(resourceLoader);
-        content.add(bc1, "Title");
+        content.add(bc1, Title.class.getName());
+
+        final BasicContainer profiles = new ProfileSelection(resourceLoader);
+        content.add(profiles, ProfileSelection.class.getName());
 
         final BasicContainer nameContainer = new NameSelect(resourceLoader);
-        content.add(nameContainer, "Name Select");
+        content.add(nameContainer, NameSelect.class.getName());
 
         final BasicContainer bc3 = new Tutorial(resourceLoader);
-        content.add(bc3, "Tutorial");
+        content.add(bc3, Tutorial.class.getName());
 
         basicFrame.show();
 

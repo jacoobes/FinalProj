@@ -2,6 +2,7 @@ package FinalProj.components;
 
 import FinalProj.Game;
 import FinalProj.scene.Scene1;
+import FinalProj.scene.Tutorial;
 import FinalProj.utils.Publisher;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.events.NameEvent;
@@ -18,7 +19,7 @@ public class InputName extends JTextField {
         super(columns);
         setFont(rl.getBitStrFont().deriveFont(50f));
         setPreferredSize(new Dimension(75,75));
-        subject.addSubscriber(rl);
+        subject.addSubscriber(rl.getNameSub());
 
         addActionListener(e -> {
             Component grandparent = getParent().getParent();
@@ -37,12 +38,12 @@ public class InputName extends JTextField {
                         //Notify resource loader a name has been selected
                         subject.notifySubs(new NameEvent(getText()));
                         // generate a new basic container with new scene
-                        BasicContainer bc1 = new Scene1(rl);
+                        BasicContainer bc1 = new Tutorial(rl);
                         // add the basic container to the basic frame
-                        rl.getFrame().getContentPane().add(bc1, "Scene1");
+                        rl.getFrame().getContentPane().add(bc1, Tutorial.class.getName());
                         //transition
                         rl.getFrame().jf.pack();
-                        Game.transitionScene((BasicContainer) grandparent, "Scene1");
+                        Game.transitionScene((BasicContainer) grandparent, Tutorial.class.getName());
                         bc1.requestFocus();
                     } else
                     {

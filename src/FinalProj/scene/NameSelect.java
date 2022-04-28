@@ -1,20 +1,13 @@
 package FinalProj.scene;
-
-import FinalProj.Game;
 import FinalProj.components.InputName;
 import FinalProj.utils.ResourceLoader;
-import basicgraphics.BasicContainer;
-
+import FinalProj.utils.events.Event;
 import javax.swing.*;
 import java.awt.*;
 
-public class NameSelect extends BasicContainer {
+public class NameSelect extends SceneAlpha {
     public NameSelect(ResourceLoader rl) {
-        super();
-        final ImageIcon backgroundImage = new ImageIcon(rl.getPicture("title").resize(1.5f).getImage());
-        var mainPanel = Game.mainPanel(backgroundImage);
-        mainPanel.setLayout(getLayout());
-        super.setPreferredSize(mainPanel.getPreferredSize());
+        super(rl,  new ImageIcon(rl.getPicture("title").resize(1.5f).getImage()));
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.gridx = GridBagConstraints.CENTER;
@@ -22,21 +15,21 @@ public class NameSelect extends BasicContainer {
         gbc.insets.top = 0;
 
         var title = new JLabel("Select Name");
-        title.setFont(rl.getBitStrFont().deriveFont(60f));
+        title.setFont(getGameFont(60f));
         title.setForeground(Color.LIGHT_GRAY);
-        mainPanel.add(title, gbc);
+        getMainBGround().add(title, gbc);
 
         var field = new InputName(10, rl);
 
         gbc.gridx = GridBagConstraints.CENTER;
         gbc.gridy = GridBagConstraints.ABOVE_BASELINE;
 
-        mainPanel.add(field, gbc);
-        String[][] splashLayout = {
-                {"Select Name"},
-        };
+        getMainBGround().add(field, gbc);
 
-        setStringLayout(splashLayout);
-        add("Select Name", mainPanel);
+    }
+
+    @Override
+    public void update(Event<Boolean> event) {
+
     }
 }

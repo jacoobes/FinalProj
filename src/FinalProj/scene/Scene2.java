@@ -36,9 +36,9 @@ public class Scene2 extends SceneAlpha {
         next.addActionListener(e -> {
             sp.stop("type");
             BasicContainer scene3 = new Scene3(rl);
-            rl.getFrame().getContentPane().add(scene3, "Scene3");
+            rl.getFrame().getContentPane().add(scene3, Scene3.class.getName());
             //transition
-            Game.transitionScene(this, "Scene3");
+            Game.transitionScene(this, Scene3.class.getName());
             //request focus
             scene3.requestFocus();
         });

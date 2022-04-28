@@ -44,9 +44,9 @@ public class Scene1 extends SceneAlpha {
         next.addActionListener(e -> {
             sp.stop("type");
             BasicContainer scene2 = new Scene2(rl);
-            rl.getFrame().getContentPane().add(scene2, "Scene2");
+            rl.getFrame().getContentPane().add(scene2, Scene2.class.getName());
             //transition
-            Game.transitionScene(this, "Scene2");
+            Game.transitionScene(this, Scene2.class.getName());
             scene2.requestFocus();
         });
         var narrate = new Timer(50, txtEmit);

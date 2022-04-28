@@ -6,6 +6,7 @@ import basicgraphics.BasicContainer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 
 public class Title extends BasicContainer {
@@ -31,7 +32,7 @@ public class Title extends BasicContainer {
         var jButton = new JButton("Start");
         jButton.setFocusable(true);
         jButton.setFont(r.getBitStrFont().deriveFont(50f));
-        jButton.addActionListener(e -> Game.transitionScene(this, "Tutorial"));
+        jButton.addActionListener(e -> Game.transitionScene(this, ProfileSelection.class.getName()));
 
         mainPanel.add(jButton, gbc);
 

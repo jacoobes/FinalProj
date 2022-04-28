@@ -1,25 +1,33 @@
 package FinalProj.utils;
 
-import FinalProj.utils.events.Event;
 import basicgraphics.BasicFrame;
 import basicgraphics.images.Picture;
-import basicgraphics.sounds.ReusableClip;
-
-import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ResourceLoader implements Subs<String> {
-    private YamlParser.Data data;
+public class ResourceLoader{
+    private YamlParser.Data myProfile;
+
+    private final Subs<String> nameSub = event -> {
+        String name = event.getState();
+        System.out.printf("Set the player's name to %s\n", name);
+        this.myProfile.name = name;
+    };
+    private final Subs<YamlParser.Data> currentProfile = event -> {
+        YamlParser.Data myp = event.getState();
+        System.out.println("Loaded : "+myp);
+        myProfile = event.getState();
+    };
+    public final YamlParser yamlizer = new YamlParser("src/FinalProj/resources/database");
     private final HashMap<String, Picture> ImageMap = new HashMap<>();
     private Font bitStr;
     private BasicFrame dad;
     private final SoundPlayer sp = new SoundPlayer();
     public ResourceLoader() {
-
+        myProfile = null;
         //Loading BitStream
         try {
             var location = new File("src/FinalProj/resources/fonts/Bitstream Vera Sans Mono Bold Nerd Font Complete Mono Windows Compatible.ttf");
@@ -52,11 +60,17 @@ public class ResourceLoader implements Subs<String> {
         try {
           sp.newSound("brown", "Super Deep Brown Noise (1 Hour).wav");
           sp.newSound("type", "typewriter-1.wav");
+          sp.setVolume("type", .3f);
         } catch (Exception e) {
             System.out.println(e);
         }
 
     }
+
+    public YamlParser.Data[] getYamlData() {
+        return yamlizer.getProfiles();
+    }
+
     public void setBf(BasicFrame bf) { this.dad = bf; }
     public BasicFrame getFrame () { return dad; }
     public Font getBitStrFont() {
@@ -66,19 +80,21 @@ public class ResourceLoader implements Subs<String> {
         return ImageMap.get(key);
     }
     public SoundPlayer getSoundPlayer() { return sp; }
-    @Override
-    public void update(Event<String> event) {
-        String name = event.getState();
-        System.out.printf("Set the player's name to %s\n", name);
-        this.data.profile = name;
-    }
 
+    public Subs<String> getNameSub() {
+        return nameSub;
+    }
+    public Subs<YamlParser.Data> profileSub() {
+        return currentProfile;
+    }
     public void addGuilt(int guilt) {
-        this.data.guilt += guilt;
+        this.myProfile.guilt += guilt;
     }
-
     public String getName()
     {
-        return this.data.profile;
+        return this.myProfile.name;
+    }
+    public YamlParser.Data getMyProfile() {
+        return myProfile;
     }
 }

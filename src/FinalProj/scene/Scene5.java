@@ -16,12 +16,11 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class Scene5 extends SceneAlpha {
-    private final JPanel buttonPanel = new JPanel();
     private final ChoiceButton c1 = new ChoiceButton("Look back").addFont(getGameFont(20f));
     private final ChoiceButton c2 = new ChoiceButton("Ignore it").addFont(getGameFont(20f));
     Scene5(ResourceLoader rl) {
-        super(rl, new ImageIcon(rl.getPicture("blackground").resize(1.5f).getImage()));
-        setLayout(getLayout());
+        super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
+        JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         JTextPane textBox = new JTextPane();
         textBox.setOpaque(false);
@@ -40,15 +39,18 @@ public class Scene5 extends SceneAlpha {
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
-        BasicContainer scene6 = new Scene6(rl);
-        rl.getFrame().getContentPane().add(scene6, "Scene6");
+
         c1.addActionListener(e -> {
-            Game.transitionScene(this, "Scene6");
             rl.addGuilt(10);
+            Game.transitionScene(this, Scene6.class.getName());
+            BasicContainer scene6 = new Scene6.LookBack(rl);
+            rl.getFrame().getContentPane().add(scene6, Scene6.class.getName());
         });
         c2.addActionListener(e -> {
-            Game.transitionScene(this, "Scene6");
             rl.addGuilt(20);
+            Game.transitionScene(this, Scene6.class.getName());
+            BasicContainer scene6 = new Scene6.Ignore(rl);
+            rl.getFrame().getContentPane().add(scene6, Scene6.class.getName());
         });
         var narrator = new Timer(75, txtEmit);
         narrator.start();
