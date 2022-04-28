@@ -65,7 +65,9 @@ public class ProfileSelection extends SceneAlpha {
                                         .forName("FinalProj.scene." + d.savedScene)
                                         .getConstructor(ResourceLoader.class);
                         var scene = cons.newInstance(rl);
-
+                        Game.sceneTracker.movePointer(
+                                Integer.parseInt(d.savedScene.substring("Scene".length()))-1
+                        );
                         System.out.println("Teleporting to " + d.savedScene);
                         rl.getFrame().getContentPane().add(scene, d.savedScene);
                     } catch (
@@ -94,7 +96,7 @@ public class ProfileSelection extends SceneAlpha {
         rl.getFrame().jf.pack();
     }
 
-    public String resolveProfileName(YamlParser.Data d) {
+    public String resolveProfileName(YamlParser.Data d)  {
         return d.name == null ? "New Profile" : d.name;
     }
 

@@ -5,12 +5,14 @@ import FinalProj.scene.ProfileSelection;
 import FinalProj.scene.Title;
 import FinalProj.scene.Tutorial;
 import FinalProj.utils.ResourceLoader;
+import FinalProj.utils.SceneTracker;
 import basicgraphics.*;
 import javax.swing.*;
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class Game {
+    public static SceneTracker sceneTracker;
     static ResourceLoader resourceLoader = new ResourceLoader();
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         final var basicFrame = new BasicFrame("Guilt");
@@ -59,4 +61,6 @@ public class Game {
         var cardLayout = (CardLayout) parentContainer.getLayout();
         cardLayout.show(parentContainer, name);
     }
+
+
 }
