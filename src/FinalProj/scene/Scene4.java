@@ -1,6 +1,7 @@
 package FinalProj.scene;
 
 import FinalProj.Game;
+import FinalProj.components.ChoiceButton;
 import FinalProj.components.TextBox;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.TextEmitter;
@@ -13,12 +14,11 @@ import static java.awt.GridBagConstraints.SOUTH;
 
 //Black scene and transition to game
 public class Scene4 extends SceneAlpha {
-    private final JButton next = new JButton(">");
+    private final ChoiceButton next = new ChoiceButton(">").addFont(getGameFont(20f));
     public Scene4(ResourceLoader rl)
     {
         super(rl,new ImageIcon(rl.getPicture("blackground").getImage()) );
-        var tutFont = rl.getBitStrFont().deriveFont(20f);
-        getMainBGround().setLayout(getLayout());
+        var tutFont = getGameFont(20f);
 
         super.setPreferredSize(getMainBGround().getPreferredSize());
         JTextArea textBox = new TextBox(tutFont);

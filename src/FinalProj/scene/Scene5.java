@@ -29,7 +29,7 @@ public class Scene5 extends SceneAlpha {
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
         textBox.setVisible(true);
-
+        textBox.setEditable(false);
         var text = """
                Screams pierce the sky.
                You continue to run in a panic.

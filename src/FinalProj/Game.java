@@ -1,10 +1,7 @@
 package FinalProj;
 
 import FinalProj.components.WindowCloseListener;
-import FinalProj.scene.NameSelect;
-import FinalProj.scene.ProfileSelection;
-import FinalProj.scene.Title;
-import FinalProj.scene.Tutorial;
+import FinalProj.scene.*;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.SceneTracker;
 import basicgraphics.*;
@@ -35,8 +32,7 @@ public class Game {
         final BasicContainer nameContainer = new NameSelect(resourceLoader);
         content.add(nameContainer, NameSelect.class.getName());
 
-        final BasicContainer bc3 = new Tutorial(resourceLoader);
-        content.add(bc3, Tutorial.class.getName());
+
 
         basicFrame.show();
 
