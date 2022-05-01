@@ -5,6 +5,7 @@ import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.SceneTracker;
 import FinalProj.utils.YamlParser;
 
+import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
@@ -17,17 +18,38 @@ public class WindowCloseListener implements WindowListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
-        if(rl.getMyProfile() == null) {
+        if(rl.getMyProfile(true) == null) {
             return;
         }
-        YamlParser.Data curProf = rl.getMyProfile();
+        YamlParser.Data curProf = rl.getMyProfile(true);
         curProf.savedScene = SceneTracker.resolveStringName();
-        try
+        int res = JOptionPane.showConfirmDialog(
+                rl.getFrame().jf,
+                "Save progress?",
+                null,
+                JOptionPane.YES_NO_OPTION
+        );
+        if (res == 0)
         {
-            rl.yamlizer.dump(curProf);
-        } catch (IOException ex)
+            try
+            {
+                rl.yamlizer.dump(curProf);
+            } catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+        else
         {
-            ex.printStackTrace();
+           YamlParser.Data backup = rl.getMyProfile(false);
+            try
+            {
+              System.out.println(backup);
+              rl.yamlizer.dump(backup);
+            } catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
         }
     }
 

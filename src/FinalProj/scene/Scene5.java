@@ -39,16 +39,16 @@ public class Scene5 extends SceneAlpha {
                 .addSub(this);
 
         c1.addActionListener(e -> {
-            rl.getMyProfile().addGuilt(10);
+            rl.getMyProfile(true).addGuilt(10);
             Game.transitionScene(this, Scene6.class.getName());
-            BasicContainer scene6 = new Scene6.LookBack(rl);
+            BasicContainer scene6 = new Scene6(rl);
             rl.getFrame().getContentPane().add(scene6, Scene6.class.getName());
         });
         c2.addActionListener(e -> {
-            rl.getMyProfile().addGuilt(20);
-            Game.transitionScene(this, Scene6.class.getName());
-            BasicContainer scene6 = new Scene6.Ignore(rl);
-            rl.getFrame().getContentPane().add(scene6, Scene6.class.getName());
+            rl.getMyProfile(true).addGuilt(20);
+            BasicContainer scene6 = new Scene7(rl);
+            rl.getFrame().getContentPane().add(scene6, Scene7.class.getName());
+            Game.transitionScene(this, Scene7.class.getName());
         });
         var narrator = new Timer(75, txtEmit);
         narrator.start();

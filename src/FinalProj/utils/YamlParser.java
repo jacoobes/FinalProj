@@ -17,7 +17,7 @@ public class YamlParser {
 
     private final Yaml yaml = new Yaml(new Constructor(Data.class));
     private List<Data> profiles = new ArrayList<>();
-    public static class Data
+    public static class Data implements Cloneable
     {
         public String name;
         public String savedScene;
@@ -42,6 +42,10 @@ public class YamlParser {
 
         public void addResolve(int resolve) {
             this.resolve += resolve;
+        }
+
+        public Data clone() throws CloneNotSupportedException {
+            return (Data) super.clone();
         }
     }
 
@@ -75,7 +79,6 @@ public class YamlParser {
     public void dump(Data d) throws IOException {
         yaml.dump(d, new FileWriter(d._fp));
     }
-
 
 }
 

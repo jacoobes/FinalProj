@@ -76,7 +76,6 @@ public class Game {
 
         try {
             var tryParse = Integer.parseInt(name.substring(name.length() - 1));
-            System.out.println(name);
             SceneTracker.incrementPointer();
         } catch (Exception e)
         {

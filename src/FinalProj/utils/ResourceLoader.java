@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public class ResourceLoader{
     private YamlParser.Data myProfile;
+    private YamlParser.Data backupData;
 
     private final Subs<String> nameSub = event -> {
         String name = event.getState();
@@ -21,6 +22,12 @@ public class ResourceLoader{
         YamlParser.Data myp = event.getState();
         System.out.println("Loaded : "+myp);
         myProfile = event.getState();
+        try
+        {
+            backupData = event.getState().clone();
+        } catch (Exception e) {
+            System.out.println("Warning : could not backup data!" );
+        }
     };
     public final YamlParser yamlizer = new YamlParser("src/FinalProj/resources/database");
     private final HashMap<String, Picture> ImageMap = new HashMap<>();
@@ -29,6 +36,7 @@ public class ResourceLoader{
     private final SoundPlayer sp = new SoundPlayer();
     public ResourceLoader() {
         myProfile = null;
+        backupData = null;
         //Loading BitStream
         try {
             var location = new File("src/FinalProj/resources/fonts/Bitstream Vera Sans Mono Bold Nerd Font Complete Mono Windows Compatible.ttf");
@@ -59,6 +67,7 @@ public class ResourceLoader{
         ImageMap.put("blackground", new Picture(blackground));
 
         try {
+          sp.newSound("click","zapsplat_multimedia_button_click_fast_short_003_79287.wav");
           sp.newSound("brown", "Super Deep Brown Noise (1 Hour).wav");
           sp.newSound("type", "typewriter-1.wav");
           sp.setVolume("type", .3f);
@@ -93,7 +102,12 @@ public class ResourceLoader{
     {
         return this.myProfile.name;
     }
-    public YamlParser.Data getMyProfile() {
-        return myProfile;
+    public YamlParser.Data getMyProfile(boolean save)
+    {
+        if(save)
+        {
+            return myProfile;
+        }
+        return backupData;
     }
 }
