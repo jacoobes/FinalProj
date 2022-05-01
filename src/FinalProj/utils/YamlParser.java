@@ -1,5 +1,6 @@
 package FinalProj.utils;
 
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
@@ -13,7 +14,8 @@ import java.util.stream.Collectors;
  * Using external library : SnakeYaml
  */
 public class YamlParser {
-    private final Yaml yamlizer = new Yaml(new Constructor(Data.class));
+
+    private final Yaml yaml = new Yaml(new Constructor(Data.class));
     private List<Data> profiles = new ArrayList<>();
     public static class Data
     {
@@ -60,7 +62,7 @@ public class YamlParser {
                  .map(f -> {
                      try
                      {
-                         return (Data) yamlizer.load(new FileInputStream(f));
+                         return (Data) yaml.load(new FileInputStream(f));
                      } catch (FileNotFoundException e)
                      {
                          e.printStackTrace();
@@ -71,8 +73,7 @@ public class YamlParser {
 
     }
     public void dump(Data d) throws IOException {
-        yamlizer.dump(d, new FileWriter("database/profile2.yaml"));
-
+        yaml.dump(d, new FileWriter(d._fp));
     }
 
 

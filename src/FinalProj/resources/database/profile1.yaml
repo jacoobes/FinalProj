@@ -1,5 +1,2 @@
-name: ~
-savedScene: "Scene1"
-guilt: 0
-resolve: 0
-_fp : "database/profile1.yaml"
+!!FinalProj.utils.YamlParser$Data {_fp: src/FinalProj/resources/database/profile1.yaml,
+  guilt: 0, name: choonks, resolve: 0, savedScene: Scene5}

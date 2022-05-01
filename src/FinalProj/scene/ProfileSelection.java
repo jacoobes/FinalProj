@@ -4,6 +4,7 @@ import FinalProj.Game;
 import FinalProj.components.ChoiceButton;
 import FinalProj.utils.Publisher;
 import FinalProj.utils.ResourceLoader;
+import FinalProj.utils.SceneTracker;
 import FinalProj.utils.YamlParser;
 import FinalProj.utils.events.CurrentProfileSelectEvent;
 import FinalProj.utils.events.Event;
@@ -65,8 +66,8 @@ public class ProfileSelection extends SceneAlpha {
                                         .forName("FinalProj.scene." + d.savedScene)
                                         .getConstructor(ResourceLoader.class);
                         var scene = cons.newInstance(rl);
-                        Game.sceneTracker.movePointer(
-                                Integer.parseInt(d.savedScene.substring("Scene".length()))-1
+                        SceneTracker.movePointer(
+                                Integer.parseInt(d.savedScene.substring("Scene".length()))
                         );
                         System.out.println("Teleporting to " + d.savedScene);
                         rl.getFrame().getContentPane().add(scene, d.savedScene);

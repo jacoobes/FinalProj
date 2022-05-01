@@ -1,5 +1,6 @@
 package FinalProj;
 
+import FinalProj.components.WindowCloseListener;
 import FinalProj.scene.NameSelect;
 import FinalProj.scene.ProfileSelection;
 import FinalProj.scene.Title;
@@ -7,13 +8,14 @@ import FinalProj.scene.Tutorial;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.SceneTracker;
 import basicgraphics.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class Game {
-    public static SceneTracker sceneTracker;
     static ResourceLoader resourceLoader = new ResourceLoader();
+
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         final var basicFrame = new BasicFrame("Guilt");
         basicFrame.jf.setIconImage(resourceLoader.getPicture("favico").getImage());
@@ -38,8 +40,14 @@ public class Game {
 
         basicFrame.show();
 
-
+        basicFrame.jf.addWindowListener(new WindowCloseListener(resourceLoader));
     }
+
+    /**
+     *
+     * @param background
+     * @return
+     */
     public static JLabel mainPanel(ImageIcon background)
     {
        return new JLabel(background) {
@@ -54,12 +62,26 @@ public class Game {
         };
     }
 
-    public static void transitionScene(BasicContainer bc, String name)
+    /**
+     *
+     * @param bc
+     * @param name
+     */
+    public static void  transitionScene(BasicContainer bc, String name)
     {
         //parentContainer is basic frame
         var parentContainer = bc.getParent();
         var cardLayout = (CardLayout) parentContainer.getLayout();
         cardLayout.show(parentContainer, name);
+
+        try {
+            var tryParse = Integer.parseInt(name.substring(name.length() - 1));
+            System.out.println(name);
+            SceneTracker.incrementPointer();
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
 

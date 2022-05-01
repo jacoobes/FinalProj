@@ -1,12 +1,9 @@
 package FinalProj.utils;
 
-import FinalProj.components.WindowCloseListener;
 import basicgraphics.BasicFrame;
 import basicgraphics.images.Picture;
 
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -68,41 +65,6 @@ public class ResourceLoader{
         } catch (Exception e) {
             System.out.println(e);
         }
-        getFrame().jf.addWindowListener(new WindowCloseListener() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowOpened(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-
-            }
-        });
 
     }
 

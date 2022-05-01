@@ -56,6 +56,7 @@ public class InputName extends JTextField {
             }
         });
     }
+
     private boolean isValidName(String s) {
         var pat = Pattern.compile("[A-Za-z]+ ?[A-Za-z]*");
         return pat.matcher(s).matches();
