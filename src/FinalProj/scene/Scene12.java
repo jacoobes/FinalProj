@@ -13,10 +13,10 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
 
-public class Scene5 extends SceneAlpha {
+public class Scene12 extends SceneAlpha {
     private final ChoiceButton c1 = new ChoiceButton("Look back").addFont(getGameFont(20f));
     private final ChoiceButton c2 = new ChoiceButton("Ignore it").addFont(getGameFont(20f));
-    public Scene5(ResourceLoader rl) {
+    public Scene12(ResourceLoader rl) {
         super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
@@ -40,15 +40,15 @@ public class Scene5 extends SceneAlpha {
 
         c1.addActionListener(e -> {
             rl.getMyProfile(true).addGuilt(10);
-            Game.transitionScene(this, Scene6.class.getName());
-            BasicContainer scene6 = new Scene6(rl);
-            rl.getFrame().getContentPane().add(scene6, Scene6.class.getName());
+            Game.transitionScene(this, Scene13.class.getName());
+            BasicContainer scene6 = new Scene13(rl);
+            rl.getFrame().getContentPane().add(scene6, Scene13.class.getName());
         });
         c2.addActionListener(e -> {
             rl.getMyProfile(true).addGuilt(20);
-            BasicContainer scene6 = new Scene7(rl);
-            rl.getFrame().getContentPane().add(scene6, Scene7.class.getName());
-            Game.transitionScene(this, Scene7.class.getName());
+            BasicContainer scene6 = new Scene14(rl);
+            rl.getFrame().getContentPane().add(scene6, Scene14.class.getName());
+            Game.transitionScene(this, Scene14.class.getName());
         });
         var narrator = new Timer(75, txtEmit);
         narrator.start();

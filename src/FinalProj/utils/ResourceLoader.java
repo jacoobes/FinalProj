@@ -65,9 +65,11 @@ public class ResourceLoader{
         ImageMap.put("scene2",scene2);
         var blackground = new BufferedImage(1200,800, BufferedImage.TYPE_BYTE_GRAY);
         ImageMap.put("blackground", new Picture(blackground));
-
+        var happy = new Picture("happy.png");
+        ImageMap.put("happy", happy);
         try {
           sp.newSound("click","zapsplat_multimedia_button_click_fast_short_003_79287.wav");
+          sp.newSound("happy", "happyscenes.wav");
           sp.newSound("brown", "Super Deep Brown Noise (1 Hour).wav");
           sp.newSound("type", "typewriter-1.wav");
           sp.setVolume("type", .3f);

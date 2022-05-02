@@ -13,16 +13,16 @@ import java.awt.*;
 import static java.awt.GridBagConstraints.CENTER;
 import static java.awt.GridBagConstraints.SOUTH;
 //Branch class of Scene 5 where MC ignores it
-public class Scene7 extends SceneAlpha {
+public class Scene14 extends SceneAlpha {
     private final ChoiceButton cb = new ChoiceButton(">").addFont(getGameFont(20f));
-    public Scene7(ResourceLoader rl) {
+    public Scene14(ResourceLoader rl) {
         super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
         JTextArea textBox = new TextBox(getGameFont(20f));
         textBox.setForeground(Color.LIGHT_GRAY);
 
         var text = String.format("""
               %s! %s! It hurts
-              ... ... Come back
+              ... ... Come back..
               """, rl.getName(), rl.getName());
 
         var txtEmit = new TextEmitter(text)
@@ -31,9 +31,9 @@ public class Scene7 extends SceneAlpha {
 
         cb.addActionListener(e -> {
             rl.getMyProfile(true).addGuilt(50);
-            Game.transitionScene(this, Scene8.class.getName());
+            Game.transitionScene(this, Scene15.class.getName());
         });
-        var narrator = new Timer(75, txtEmit);
+        var narrator = new Timer(50, txtEmit);
         narrator.start();
         var gbc = new GridBagConstraints();
         gbc.gridy = SOUTH;

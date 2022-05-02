@@ -8,73 +8,70 @@ import basicgraphics.BasicContainer;
 
 import javax.swing.*;
 import java.awt.*;
+
 import static java.awt.GridBagConstraints.SOUTH;
 
-public class Scene8 extends SceneAlpha {
+public class Scene10 extends SceneAlpha {
     private final JButton next = new JButton(">");
-
-    public Scene8(ResourceLoader rl) {
-
+    public Scene10(ResourceLoader rl)
+    {
         super(rl, new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage()));
-        try {
-            sp.loop("brown",-1);
-            sp.setVolume("brown", .3f);
-        } catch (Throwable e) {
-            System.out.println(e);
-        }
         var tutFont = getGameFont(20f);
+
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
         var text = String.format("""
-               Help me...  Please... %s
-               I never meant it. I promise.
-               Help me out will you?
-               """, rl.getName());
-
+            A shout from a hill.
+            You look at the dark figurine crying for help.
+            You take a step back, looking the opposite direction.
+            
+            "Please... %s"
+            The shouting gets closer, and you run.
+            """,rl.getName());
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
 
         var gbc = new GridBagConstraints();
-         gbc.gridy = SOUTH;
+        gbc.gridy = SOUTH;
 
-      // make sure to uncomment in game
-     //   next.setVisible(false);
         next.setFont(tutFont);
         next.addActionListener(e -> {
             sp.stop("type");
-            BasicContainer scene2 = new Scene9(rl);
-            rl.getFrame().getContentPane().add(scene2, Scene9.class.getName());
+            BasicContainer scene4 = new Scene11(rl);
+            rl.getFrame().getContentPane().add(scene4, Scene11.class.getName());
             //transition
-            Game.transitionScene(this, Scene9.class.getName());
-            scene2.requestFocus();
+            Game.transitionScene(this, Scene11.class.getName());
+            //request focus
+            scene4.requestFocus();
         });
-        var narrate = new Timer(50, txtEmit);
-        narrate.start();
+
+        var narrate = new Timer(75, txtEmit);
         try {
-         sp.loop("type",4);
-        } catch (Throwable e)
+            sp.loop("type",-1);
+        } catch ( Exception e)
         {
             System.out.println(e);
         }
-
         getMainBGround().add(textBox);
         getMainBGround().add(next, gbc);
+        narrate.start();
         rl.getFrame().jf.pack();
     }
 
     @Override
     public void update(Event<Boolean> event) {
-        sp.stop("type");
         if(event.getState())
         {
+            sp.stop("type");
             var showButton = new Timer(2000, e -> {
-                System.out.println("Scene1 has finished");
+                System.out.println("Scene3 has finished");
                 next.setVisible(true);
+                next.requestFocus();
             });
             showButton.setRepeats(false);
             showButton.start();
+
         }
     }
-
 }

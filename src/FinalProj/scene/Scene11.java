@@ -13,9 +13,9 @@ import static java.awt.GridBagConstraints.CENTER;
 import static java.awt.GridBagConstraints.SOUTH;
 
 //Black scene and transition to game
-public class Scene4 extends SceneAlpha {
+public class Scene11 extends SceneAlpha {
     private final ChoiceButton next = new ChoiceButton(">").addFont(getGameFont(20f));
-    public Scene4(ResourceLoader rl)
+    public Scene11(ResourceLoader rl)
     {
         super(rl,new ImageIcon(rl.getPicture("blackground").getImage()) );
         var tutFont = getGameFont(20f);
@@ -37,10 +37,10 @@ public class Scene4 extends SceneAlpha {
         next.setVisible(false);
         next.addActionListener(e -> {
             sp.stop("type");
-            BasicContainer scene5 = new Scene5(rl);
-            rl.getFrame().getContentPane().add(scene5, Scene5.class.getName());
+            BasicContainer scene5 = new Scene12(rl);
+            rl.getFrame().getContentPane().add(scene5, Scene12.class.getName());
             //transition
-            Game.transitionScene(this, Scene5.class.getName());
+            Game.transitionScene(this, Scene12.class.getName());
             //request focus
             scene5.requestFocus();
         });
