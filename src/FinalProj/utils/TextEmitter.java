@@ -11,13 +11,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class TextEmitter implements ActionListener {
     private final Publisher<Boolean> publ = new Publisher<>();
     private JTextComponent text;
-    private final String message;
+    private String message;
     private final AtomicInteger i = new AtomicInteger(0);
-    private SoundPlayer sp;
     public TextEmitter(String m)
     {
         message = m;
     }
+
+    public void setText(String t)
+    {
+        message = t;
+    }
+
     public TextEmitter addSub(Subs<Boolean> sub)
     {
         publ.addSubscriber(sub);
@@ -31,6 +36,7 @@ public class TextEmitter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String innerText = text.getText();
+        System.out.println("a"+innerText);
         innerText += message.charAt(i.getAndIncrement());
         text.setText(innerText);
         if (i.get() > message.length() - 1) {
