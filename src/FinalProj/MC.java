@@ -1,6 +1,5 @@
 package FinalProj;
 
-import basicgraphics.Clock;
 import basicgraphics.Sprite;
 import basicgraphics.SpriteComponent;
 import basicgraphics.Task;
@@ -19,13 +18,8 @@ public class MC extends Sprite {
         }
         setX(750);
         setY(400);
-        freeze();
-    }
-    public void freeze() {
         setPicture(frames[0]);
-        curFrame = 0;
     }
-
     public Task animate() {
         return new Task() {
             @Override

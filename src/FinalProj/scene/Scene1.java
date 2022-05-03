@@ -30,7 +30,7 @@ public class Scene1 extends SceneAlpha {
         textBox.setVisible(true);
         var text = String.format("""
               Don't you love this place, darling?
-              It has your favorite flowers, the lilies.     
+              It has your favorite flowers, the lilies.   
                                                      
               This place is gorgeous %s, I love it!
               Why did you bring me here?                               
@@ -57,6 +57,7 @@ public class Scene1 extends SceneAlpha {
         var narrate = new Timer(50, txtEmit);
         narrate.start();
         try {
+            sp.setVolume("type",.10f);
             sp.loop("type",1);
         } catch (Throwable e)
         {
@@ -70,5 +71,9 @@ public class Scene1 extends SceneAlpha {
     @Override
     public void update(Event<Boolean> event) {
         sp.stop("type");
+        if(event.getState())
+        {
+            next.setVisible(true);
+        }
     }
 }

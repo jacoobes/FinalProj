@@ -27,6 +27,7 @@ public abstract class SceneAlpha extends BasicContainer implements Subs<Boolean>
         mainPanel.setLayout(getLayout());
         mainBGround = mainPanel;
         setStringLayout(layoutScene());
+        setPreferredSize(mainPanel.getPreferredSize());
         add("Background", mainPanel);
     }
     protected String[][] layoutScene()

@@ -67,7 +67,7 @@ public class ProfileSelection extends SceneAlpha {
                                         .getConstructor(ResourceLoader.class);
                         var scene = cons.newInstance(rl);
                         SceneTracker.movePointer(
-                                Integer.parseInt(d.savedScene.substring("Scene".length()))
+                                Integer.parseInt(d.savedScene.substring("Scene".length())) -1
                         );
                         System.out.println("Teleporting to " + d.savedScene);
                         rl.getFrame().getContentPane().add(scene, d.savedScene);

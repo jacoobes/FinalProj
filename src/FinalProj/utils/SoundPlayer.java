@@ -100,4 +100,9 @@ public class SoundPlayer {
         FloatControl gainControl = (FloatControl) mySounds.get(name).getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(20f * (float) Math.log10(volume));
     }
+
+    public boolean isPlaying(String name) {
+        return mySounds.get(name).isRunning();
+
+    }
 }
