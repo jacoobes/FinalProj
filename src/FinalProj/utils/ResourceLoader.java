@@ -7,17 +7,25 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ResourceLoader{
-    private YamlParser.Data myProfile;
-    private YamlParser.Data backupData;
+
+
+    private ArrayList<String> dialogueAcc = new ArrayList<>();
+    private final Subs<String> buttonDialogue = event -> {
+        dialogueAcc.add(event.getState());
+    };
 
     private final Subs<String> nameSub = event -> {
         String name = event.getState();
         System.out.printf("Set the player's name to %s\n", name);
         this.myProfile.name = name;
     };
+
+    private YamlParser.Data myProfile;
+    private YamlParser.Data backupData;
     private final Subs<YamlParser.Data> currentProfile = event -> {
         YamlParser.Data myp = event.getState();
         System.out.println("Loaded : "+myp);
@@ -99,6 +107,7 @@ public class ResourceLoader{
     public Subs<YamlParser.Data> profileSub() {
         return currentProfile;
     }
+    public Subs<String> getButtonDialogue() { return buttonDialogue; }
 
     public String getName()
     {
@@ -111,5 +120,10 @@ public class ResourceLoader{
             return myProfile;
         }
         return backupData;
+    }
+
+    public ArrayList<String> getDialogueAcc()
+    {
+        return dialogueAcc;
     }
 }

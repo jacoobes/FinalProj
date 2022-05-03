@@ -38,7 +38,7 @@ public class Scene2 extends SceneAlpha {
         switch (event.getState())
         {
             case "We first met here."-> {
-                textEmitter.setText("This was where we first met of course!");
+                    textEmitter.setText("This was where we first met of course!");
             }
             case "It was too congested inside." -> {
                 textEmitter.setText("We needed to go outside, it was too congested!");
@@ -76,6 +76,7 @@ public class Scene2 extends SceneAlpha {
         });
         var choiceButtons = choicePanel.getButtons();
 
+        pub.addSubscriber(rl.getButtonDialogue());
 
         var textPanel = new JPanel(new GridBagLayout());
         textPanel.setOpaque(false);
@@ -91,10 +92,10 @@ public class Scene2 extends SceneAlpha {
         textPanel.setVisible(false);
         sc.setVisible(false);
 
-        var sc3 = new Scene3(rl);
-        rl.getFrame().getContentPane().add(sc3,Scene3.class.getName());
 
         next.addActionListener(e -> {
+            var sc3 = new Scene3(rl);
+            rl.getFrame().getContentPane().add(sc3,Scene3.class.getName());
             Game.transitionScene(this, Scene3.class.getName());
         });
 

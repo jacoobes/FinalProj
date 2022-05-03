@@ -36,7 +36,6 @@ public class TextEmitter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String innerText = text.getText();
-        System.out.println("a"+innerText);
         innerText += message.charAt(i.getAndIncrement());
         text.setText(innerText);
         if (i.get() > message.length() - 1) {

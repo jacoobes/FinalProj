@@ -2,7 +2,6 @@ package FinalProj.scene;
 
 import FinalProj.Game;
 import FinalProj.components.SemiTransparentTextField;
-import FinalProj.components.TextBox;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.TextEmitter;
 import FinalProj.utils.events.Event;
