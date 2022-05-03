@@ -16,8 +16,6 @@ public class MC extends Sprite {
         for (int i = 0; i < frames.length; i++) {
             frames[i] = new Picture(String.format("mc_talking-%s.png", i));
         }
-        setX(750);
-        setY(400);
         setPicture(frames[0]);
     }
     public Task animate() {
@@ -27,6 +25,7 @@ public class MC extends Sprite {
                 if(curFrame == 4) curFrame = 0;
                 setPicture(frames[curFrame]);
                 curFrame++;
+                MC.super.getSpriteComponent().repaint();
             }
         };
 
