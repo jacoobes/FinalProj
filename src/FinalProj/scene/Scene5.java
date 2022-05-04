@@ -1,6 +1,7 @@
 package FinalProj.scene;
 
 import FinalProj.Game;
+import FinalProj.components.ChoiceButton;
 import FinalProj.components.SemiTransparentTextField;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.TextEmitter;
@@ -12,13 +13,15 @@ import java.awt.*;
 
 import static java.awt.GridBagConstraints.SOUTH;
 
-public class Scene1 extends SceneAlpha {
-    private final JButton next = new JButton(">");
-    public Scene1(ResourceLoader rl) {
-        super(rl, new ImageIcon(rl.getPicture("happy").resize(1.5f).getImage()));
+public class Scene5 extends SceneAlpha {
+    private final ChoiceButton next = new ChoiceButton(">");
+    public Scene5(ResourceLoader resourceLoader)
+    {
+        super(resourceLoader, new ImageIcon(resourceLoader.getPicture("happy").resize(1.5f).getImage()));
+
         try
         {
-         sp.loop("happy",-1);
+            sp.loop("happy",-1);
         } catch (Exception e)
         {
             System.out.println(e);
@@ -28,12 +31,12 @@ public class Scene1 extends SceneAlpha {
         textBox.setForeground(Color.darkGray);
         textBox.setVisible(true);
         var text = String.format("""
-              Don't you love this place, darling?
-              It has your favorite flowers, the lilies.   
-                                                     
-              "This place is gorgeous %s, I love it!
-              Why did you bring me here?"                               
-               """, rl.getName());
+              Oh, %s, I've been waiting for that question
+              my entire life....
+              
+              Yes, yes, of course I'll marry you!
+              I want to spend the rest of my life with you.
+              """, resourceLoader.getName());
 
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
@@ -47,11 +50,11 @@ public class Scene1 extends SceneAlpha {
         next.setFont(tutFont);
         next.addActionListener(e -> {
             sp.stop("type");
-            BasicContainer scene2 = new Scene2(rl);
-            rl.getFrame().getContentPane().add(scene2, Scene2.class.getName());
+            var scene6 = new Scene6(resourceLoader);
+            resourceLoader.getFrame().getContentPane().add(scene6, Scene6.class.getName());
             //transition
-            Game.transitionScene(this, Scene2.class.getName());
-            scene2.requestFocus();
+            Game.transitionScene(this, Scene6.class.getName());
+            scene6.requestFocus();
         });
         var narrate = new Timer(50, txtEmit);
         narrate.start();
@@ -65,14 +68,10 @@ public class Scene1 extends SceneAlpha {
 
         getMainBGround().add(textBox);
         getMainBGround().add(next, gbc);
-        rl.getFrame().jf.pack();
+        resourceLoader.getFrame().jf.pack();
     }
     @Override
     public void update(Event<Boolean> event) {
-        sp.stop("type");
-        if(event.getState())
-        {
-            next.setVisible(true);
-        }
+        next.toggleVis();
     }
 }

@@ -1,5 +1,6 @@
 package FinalProj.scene;
 
+import FinalProj.Game;
 import FinalProj.components.ChoiceButton;
 import FinalProj.components.SemiTransparentTextField;
 import FinalProj.utils.ResourceLoader;
@@ -11,6 +12,9 @@ import java.util.ArrayList;
 
 import static java.awt.GridBagConstraints.SOUTH;
 
+
+//TODO :
+// Add persistence for choice picked for Scene3
 public class Scene3 extends SceneAlpha {
     private final ChoiceButton next = new ChoiceButton(">");
 
@@ -41,7 +45,11 @@ public class Scene3 extends SceneAlpha {
         var textBox = new SemiTransparentTextField(tutFont);
         textBox.setForeground(Color.darkGray);
         textBox.setVisible(true);
-
+        next.addActionListener(e -> {
+            var s4 = new Scene4(rl);
+            rl.getFrame().getContentPane().add(s4,Scene4.class.getName());
+            Game.transitionScene(this, Scene4.class.getName());
+        });
         ArrayList<String> curDialogue = resourceLoader.getDialogueAcc();
         var response = switch (curDialogue.get(0)) {
             case C1 -> "I never knew you were so thoughtful.";

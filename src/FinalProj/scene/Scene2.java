@@ -80,6 +80,7 @@ public class Scene2 extends SceneAlpha {
 
         var textPanel = new JPanel(new GridBagLayout());
         textPanel.setOpaque(false);
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.anchor = GridBagConstraints.CENTER;
