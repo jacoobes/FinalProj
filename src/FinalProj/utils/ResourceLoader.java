@@ -7,15 +7,26 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ResourceLoader{
 
+    // these constants are choices for scenes. the notation for variables =
+    // regex -> S\dC\d S = Scene, C = Choice
+    public static final String S2C0 = "We first met here.";
+    public static final String S2C1 = "It was too congested inside.";
+    public static final String S2C2 = "I would take you anywhere.";
+    public static final String S2C3 = "Your favorite flowers are here.";
 
-    private ArrayList<String> dialogueAcc = new ArrayList<>();
+    public static final String S6C0 = "I will care for you always.";
+    public static final String S6C1 = "Good, now you're my housewife.";
+    public static final String S6C2 = "I will protect you from anything.";
+    public static final String S6C3 = "I will love you forever.";
+
     private final Subs<String> buttonDialogue = event -> {
-        dialogueAcc.add(event.getState());
+        String choice = event.getState();
+        System.out.printf("Added a current choice to player %s\n", choice);
+        this.myProfile.addChoice(choice);
     };
 
     private final Subs<String> nameSub = event -> {
@@ -122,8 +133,4 @@ public class ResourceLoader{
         return backupData;
     }
 
-    public ArrayList<String> getDialogueAcc()
-    {
-        return dialogueAcc;
-    }
 }

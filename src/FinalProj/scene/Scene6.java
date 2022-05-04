@@ -16,6 +16,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
+import static FinalProj.utils.ResourceLoader.*;
+
 public class Scene6 extends SceneAlpha {
     private final SpriteComponent sc = new SpriteComponent();
     private final MC joe = new MC(sc);
@@ -35,13 +37,13 @@ public class Scene6 extends SceneAlpha {
         var textEmitter = new TextEmitter("").addSub(this).setJText(speechBubble);
           switch(event.getState())
           {
-              case "I will care for you always." ->
+              case S6C0 ->
                       textEmitter.setText("I will care and watch over you, no matter the condition.");
-              case "Good, now you're my housewife." ->
+              case S6C1 ->
                       textEmitter.setText("Now you can stay at home and cook food for us.");
-              case "I will protect you from anything." ->
-                      textEmitter.setText("No matter the issue, I will protect you with my life.");
-              case "I will love you forever." ->
+              case S6C2 ->
+                      textEmitter.setText("No matter the challenge, I will protect you with my life.");
+              case S6C3 ->
                       textEmitter.setText("My love only grows stronger, everlasting with you");
           }
         new Timer(75, textEmitter).start();
@@ -89,6 +91,12 @@ public class Scene6 extends SceneAlpha {
             });
         }
 
+        next.addActionListener(e -> {
+            //var sc7 = new Scene7(resourceLoader);
+            //resourceLoader.getFrame().getContentPane().add(sc7, Scene7.class.getName());
+
+        });
+
         var gbcPanel = new GridBagConstraints();
         gbcPanel.insets = new Insets(300,0,0,0);
         gbcPanel.ipady = 150;
@@ -98,8 +106,6 @@ public class Scene6 extends SceneAlpha {
         getMainBGround().add(choicePanel, gbcPanel);
         resourceLoader.getFrame().jf.pack();
     }
-
-
 
     @Override
     public void update(Event<Boolean> event) {

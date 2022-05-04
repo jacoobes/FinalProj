@@ -17,6 +17,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
+import static FinalProj.utils.ResourceLoader.*;
+
 public class Scene2 extends SceneAlpha {
     private static final Publisher<String> pub = new Publisher<>();
     private final ChoiceButton next = new ChoiceButton(">");
@@ -37,18 +39,10 @@ public class Scene2 extends SceneAlpha {
         var textEmitter = new TextEmitter("").addSub(this).setJText(speechBubble);
         switch (event.getState())
         {
-            case "We first met here."-> {
-                    textEmitter.setText("This was where we first met of course!");
-            }
-            case "It was too congested inside." -> {
-                textEmitter.setText("We needed to go outside, it was too congested!");
-            }
-            case "I would take you anywhere." -> {
-                textEmitter.setText("My love, I'd take you anywhere to make you happy.");
-            }
-            case "Your favorite flowers are here." -> {
-                textEmitter.setText("Your favorite lilies of course!");
-            }
+            case S2C0 -> textEmitter.setText("This was where we first met of course!");
+            case S2C1 -> textEmitter.setText("We needed to go outside, it was too congested!");
+            case S2C2 -> textEmitter.setText("My love, I'd take you anywhere to make you happy.");
+            case S2C3 -> textEmitter.setText("Your favorite lilies of course!");
         }
         new Timer(75, textEmitter).start();
     };

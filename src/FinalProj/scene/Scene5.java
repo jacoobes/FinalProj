@@ -73,5 +73,6 @@ public class Scene5 extends SceneAlpha {
     @Override
     public void update(Event<Boolean> event) {
         next.toggleVis();
+        sp.stop("type");
     }
 }

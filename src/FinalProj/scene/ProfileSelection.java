@@ -52,6 +52,8 @@ public class ProfileSelection extends SceneAlpha {
                     );
                     if (res == 0)
                     {
+                        System.out.println(d);
+                        publisher.notifySubs(new CurrentProfileSelectEvent(d));
                         Game.transitionScene(this, NameSelect.class.getName());
                     }
                 } else
@@ -70,7 +72,6 @@ public class ProfileSelection extends SceneAlpha {
                                 Integer.parseInt(d.savedScene.substring("Scene".length())) -1
                         );
                         System.out.println("Teleporting to " + d.savedScene);
-                        scene.requestFocus();
                         rl.getFrame().getContentPane().add(scene, d.savedScene);
                     } catch (
                             InstantiationException

@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import static java.awt.GridBagConstraints.SOUTH;
 
 
-//TODO :
-// Add persistence for choice picked for Scene3
 public class Scene3 extends SceneAlpha {
     private final ChoiceButton next = new ChoiceButton(">");
 
@@ -50,7 +48,7 @@ public class Scene3 extends SceneAlpha {
             rl.getFrame().getContentPane().add(s4,Scene4.class.getName());
             Game.transitionScene(this, Scene4.class.getName());
         });
-        ArrayList<String> curDialogue = resourceLoader.getDialogueAcc();
+        ArrayList<String> curDialogue = resourceLoader.getMyProfile(true).choices;
         var response = switch (curDialogue.get(0)) {
             case C1 -> "I never knew you were so thoughtful.";
             case C2 -> "Oh, I see, well, it's still beautiful";

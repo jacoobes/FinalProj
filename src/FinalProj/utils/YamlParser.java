@@ -23,8 +23,8 @@ public class YamlParser {
         public String savedScene;
         public int guilt = 0;
         public int resolve = 0;
+        public ArrayList<String> choices = new ArrayList<>();
         public String _fp;
-
         @Override
         public String toString() {
             return "Data{" +
@@ -32,6 +32,7 @@ public class YamlParser {
                     ", savedScene='" + savedScene + '\'' +
                     ", guilt=" + guilt +
                     ", resolve=" + resolve +
+                    ", choices=" + choices +
                     ", _fp=" + _fp +
                     '}';
         }
@@ -39,7 +40,7 @@ public class YamlParser {
         public void addGuilt(int guilt) {
             this.guilt += guilt;
         }
-
+        public void addChoice(String choice) { choices.add(choice); }
         public void addResolve(int resolve) {
             this.resolve += resolve;
         }
