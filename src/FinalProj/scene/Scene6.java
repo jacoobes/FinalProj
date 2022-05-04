@@ -1,5 +1,6 @@
 package FinalProj.scene;
 
+import FinalProj.Game;
 import FinalProj.MC;
 import FinalProj.components.ChoiceButton;
 import FinalProj.components.QuadChoicePanel;
@@ -35,7 +36,7 @@ public class Scene6 extends SceneAlpha {
     }
     private final Subs<String> continueScene = event -> {
         var textEmitter = new TextEmitter("").addSub(this).setJText(speechBubble);
-          switch(event.getState())
+              switch(event.getState())
           {
               case S6C0 ->
                       textEmitter.setText("I will care and watch over you, no matter the condition.");
@@ -52,6 +53,23 @@ public class Scene6 extends SceneAlpha {
     public Scene6(ResourceLoader resourceLoader) {
         super(resourceLoader, new ImageIcon(resourceLoader.getPicture("happy").resize(1.5f).getImage()));
         sc.setPreferredSize(new Dimension(300, 600));
+
+        if(!sp.isPlaying("happy"))
+        {
+            try
+            {
+                sp.loop("happy",-1);
+            } catch(Throwable e)
+            {
+                System.out.println(e);
+            }
+        }
+        try
+        {
+            sp.loop("type",1);
+        } catch (Exception e)
+        {
+        }
         Clock.addTask(joe.animate());
         var choicePanel = new QuadChoicePanel(new ChoiceButton[] {
                 new ChoiceButton("I will care for you always.").addFont(getGameFont(20f)),
@@ -92,9 +110,9 @@ public class Scene6 extends SceneAlpha {
         }
 
         next.addActionListener(e -> {
-            //var sc7 = new Scene7(resourceLoader);
-            //resourceLoader.getFrame().getContentPane().add(sc7, Scene7.class.getName());
-
+            SceneAlpha sc7 = new Scene7(resourceLoader);
+            resourceLoader.getFrame().getContentPane().add(sc7, Scene7.class.getName());
+            Game.transitionScene(this,Scene7.class.getName());
         });
 
         var gbcPanel = new GridBagConstraints();

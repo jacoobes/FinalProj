@@ -1,11 +1,13 @@
 package FinalProj.scene;
 
 import FinalProj.Game;
+import FinalProj.MC;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.SoundPlayer;
 import FinalProj.utils.Subs;
 import FinalProj.utils.events.Event;
 import basicgraphics.BasicContainer;
+import basicgraphics.SpriteComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +17,8 @@ public abstract class SceneAlpha extends BasicContainer implements Subs<Boolean>
     protected Font gameFont;
     protected JLabel mainBGround;
     protected SoundPlayer sp;
+    protected SpriteComponent sc = new SpriteComponent();
+    protected MC mainCharac = new MC(sc);
     public SceneAlpha(
             ResourceLoader rl,
             ImageIcon background

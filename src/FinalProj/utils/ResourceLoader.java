@@ -86,6 +86,8 @@ public class ResourceLoader{
         ImageMap.put("blackground", new Picture(blackground));
         var happy = new Picture("happy.png");
         ImageMap.put("happy", happy);
+        var sunset = new Picture("sunset.png");
+        ImageMap.put("sunset", sunset);
         try {
           sp.newSound("click","zapsplat_multimedia_button_click_fast_short_003_79287.wav");
           sp.newSound("happy", "happyscenes.wav");

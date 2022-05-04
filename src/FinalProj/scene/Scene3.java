@@ -10,13 +10,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static FinalProj.utils.ResourceLoader.*;
 import static java.awt.GridBagConstraints.SOUTH;
 
 
 public class Scene3 extends SceneAlpha {
     private final ChoiceButton next = new ChoiceButton(">");
 
-    private static final String C1 = "We first met here.";
     private static final String C2 = "It was too congested inside.";
     private static final String C3 = "I would take you anywhere.";
     private static final String C4 = "Your favorite flowers are here.";
@@ -50,10 +50,10 @@ public class Scene3 extends SceneAlpha {
         });
         ArrayList<String> curDialogue = resourceLoader.getMyProfile(true).choices;
         var response = switch (curDialogue.get(0)) {
-            case C1 -> "I never knew you were so thoughtful.";
-            case C2 -> "Oh, I see, well, it's still beautiful";
-            case C3 -> "Awe, you're so sweet.. This is such a wonderful place.";
-            case C4 -> "Wow, I cant believe you thought of that!";
+            case S2C0 -> "I never knew you were so thoughtful.";
+            case S2C1 -> "Oh, I see, well, it's still beautiful";
+            case S2C2 -> "Awe, you're so sweet.. This is such a wonderful place.";
+            case S2C3 -> "Wow, I cant believe you thought of that!";
             default -> throw new IllegalArgumentException("X");
         };
 

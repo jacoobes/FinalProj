@@ -6,7 +6,6 @@ import FinalProj.components.SemiTransparentTextField;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.TextEmitter;
 import FinalProj.utils.events.Event;
-import basicgraphics.BasicContainer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,13 +17,24 @@ public class Scene5 extends SceneAlpha {
     public Scene5(ResourceLoader resourceLoader)
     {
         super(resourceLoader, new ImageIcon(resourceLoader.getPicture("happy").resize(1.5f).getImage()));
-
+        if(!sp.isPlaying("happy"))
+        {
+            try
+            {
+                sp.loop("happy",-1);
+            } catch(Throwable e)
+            {
+                System.out.println(e);
+            }
+        }
         try
         {
-            sp.loop("happy",-1);
+            sp.loop("type", -1);
+
         } catch (Exception e)
         {
             System.out.println(e);
+
         }
         var tutFont = getGameFont(20f);
         var textBox = new SemiTransparentTextField(tutFont);

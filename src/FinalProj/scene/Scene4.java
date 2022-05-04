@@ -23,6 +23,17 @@ public class Scene4 extends SceneAlpha {
     public Scene4(ResourceLoader rl)
     {
         super(rl, new ImageIcon(rl.getPicture("happy").resize(1.5f).getImage()));
+        if(!sp.isPlaying("happy"))
+        {
+            try
+            {
+                sp.loop("happy",-1);
+                sp.loop("type",-1);
+            } catch(Throwable e)
+            {
+                System.out.println(e);
+            }
+        }
         Clock.addTask(joe.animate());
         Clock.start(75);
         var textPanel = new JPanel(new GridBagLayout());
@@ -52,6 +63,7 @@ public class Scene4 extends SceneAlpha {
                     It brings back memories, yes?
                     Ever since we were kids,
                     my love is for you and for you only.
+                    
                     Will you marry me?
                     """)
                     .addSub(this)
