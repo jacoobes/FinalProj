@@ -15,8 +15,6 @@ import java.awt.*;
 
 public class Scene4 extends SceneAlpha {
     private final ChoiceButton next = new ChoiceButton(">");
-    private final SpriteComponent sc = new SpriteComponent();
-    private final MC joe = new MC(sc);
     private final SemiTransparentTextField speechBubble = new SemiTransparentTextField(getGameFont(20f));
     private int buttonClicks = 0;
 
@@ -34,17 +32,17 @@ public class Scene4 extends SceneAlpha {
                 System.out.println(e);
             }
         }
-        Clock.addTask(joe.animate());
+        Clock.addTask(mainCharac.animate());
         Clock.start(75);
         var textPanel = new JPanel(new GridBagLayout());
-        sc.setPreferredSize(new Dimension(300,600));
 
-        speechBubble.setForeground(Color.darkGray);
         textPanel.setVisible(true);
         textPanel.setOpaque(false);
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.anchor = GridBagConstraints.CENTER;
+
         speechBubble.setVisible(true);
 
         var textEmitter = new TextEmitter("""

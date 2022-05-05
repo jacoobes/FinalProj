@@ -24,6 +24,7 @@ public abstract class SceneAlpha extends BasicContainer implements Subs<Boolean>
             ImageIcon background
     ) {
         super();
+        sc.setPreferredSize(new Dimension(300,600));
         this.resourceLoader = rl;
         this.gameFont = rl.getBitStrFont();
         sp = rl.getSoundPlayer();

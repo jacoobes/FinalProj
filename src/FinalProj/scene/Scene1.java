@@ -25,7 +25,6 @@ public class Scene1 extends SceneAlpha {
         }
         var tutFont = getGameFont(20f);
         var textBox = new SemiTransparentTextField(tutFont);
-        textBox.setForeground(Color.darkGray);
         textBox.setVisible(true);
         var text = String.format("""
               Don't you love this place, darling?

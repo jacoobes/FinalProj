@@ -17,10 +17,6 @@ import static java.awt.GridBagConstraints.SOUTH;
 public class Scene3 extends SceneAlpha {
     private final ChoiceButton next = new ChoiceButton(">");
 
-    private static final String C2 = "It was too congested inside.";
-    private static final String C3 = "I would take you anywhere.";
-    private static final String C4 = "Your favorite flowers are here.";
-
     public Scene3(ResourceLoader rl)
     {
         super(rl, new ImageIcon(rl.getPicture("happy").resize(1.5f).getImage()));
@@ -41,7 +37,6 @@ public class Scene3 extends SceneAlpha {
         }
         var tutFont = getGameFont(20f);
         var textBox = new SemiTransparentTextField(tutFont);
-        textBox.setForeground(Color.darkGray);
         textBox.setVisible(true);
         next.addActionListener(e -> {
             var s4 = new Scene4(rl);

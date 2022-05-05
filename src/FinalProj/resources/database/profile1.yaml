@@ -1,8 +1,7 @@
 !!FinalProj.utils.YamlParser$Data
 _fp: src/FinalProj/resources/database/profile1.yaml
-choices: [Your favorite flowers are here., I will protect you from anything., I will
-    love you forever., I will care for you always., I will protect you from anything.]
+choices: [We first met here., I will care for you always.]
 guilt: 0
-name: pooba
-resolve: 90
-savedScene: Scene7
+name: d
+resolve: 0
+savedScene: Scene8

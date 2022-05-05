@@ -12,6 +12,7 @@ public class SemiTransparentTextField extends TextBox {
 
 
     protected void init() {
+        setForeground(Color.darkGray);
         setOpaque(false);
     }
 

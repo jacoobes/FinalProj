@@ -1,7 +1,6 @@
 package FinalProj.scene;
 
 import FinalProj.Game;
-import FinalProj.MC;
 import FinalProj.components.ChoiceButton;
 import FinalProj.components.QuadChoicePanel;
 import FinalProj.components.SemiTransparentTextField;
@@ -11,7 +10,6 @@ import FinalProj.utils.Subs;
 import FinalProj.utils.TextEmitter;
 import FinalProj.utils.events.Event;
 import basicgraphics.Clock;
-import basicgraphics.SpriteComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +18,6 @@ import java.util.HashMap;
 import static FinalProj.utils.ResourceLoader.*;
 
 public class Scene6 extends SceneAlpha {
-    private final SpriteComponent sc = new SpriteComponent();
-    private final MC joe = new MC(sc);
     private final ChoiceButton next = new ChoiceButton(">");
     private final Publisher<String> pub = new Publisher<>();
     private final SemiTransparentTextField speechBubble = new SemiTransparentTextField(getGameFont(20f));
@@ -64,18 +60,13 @@ public class Scene6 extends SceneAlpha {
                 System.out.println(e);
             }
         }
-        try
-        {
-            sp.loop("type",1);
-        } catch (Exception e)
-        {
-        }
-        Clock.addTask(joe.animate());
+
+        Clock.addTask(mainCharac.animate());
         var choicePanel = new QuadChoicePanel(new ChoiceButton[] {
-                new ChoiceButton("I will care for you always.").addFont(getGameFont(20f)),
-                new ChoiceButton("Good, now you're my housewife.").addFont(getGameFont(20f)),
-                new ChoiceButton("I will protect you from anything.").addFont(getGameFont(20f)),
-                new ChoiceButton("I will love you forever.").addFont(getGameFont(20f))
+                new ChoiceButton(S6C0).addFont(getGameFont(20f)),
+                new ChoiceButton(S6C1).addFont(getGameFont(20f)),
+                new ChoiceButton(S6C2).addFont(getGameFont(20f)),
+                new ChoiceButton(S6C3).addFont(getGameFont(20f))
         });
         pub.addSubscriber(resourceLoader.getButtonDialogue());
         var buttons  = choicePanel.getButtons();

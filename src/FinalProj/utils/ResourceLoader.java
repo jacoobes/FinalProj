@@ -23,10 +23,15 @@ public class ResourceLoader{
     public static final String S6C2 = "I will protect you from anything.";
     public static final String S6C3 = "I will love you forever.";
 
+    public static final String S8C0 = "Say : excuse me?";
+    public static final String S8C1 = "Say nothing.";
+    public static final String S8C2 = "Say : Ignore him, dear.";
+    public static final String S8C3 = "Look at him.";
+
     private final Subs<String> buttonDialogue = event -> {
         String choice = event.getState();
         System.out.printf("Added a current choice to player %s\n", choice);
-        this.myProfile.addChoice(choice);
+        this.getMyProfile(true).addChoice(choice);
     };
 
     private final Subs<String> nameSub = event -> {
@@ -93,6 +98,7 @@ public class ResourceLoader{
           sp.newSound("happy", "happyscenes.wav");
           sp.newSound("brown", "Super Deep Brown Noise (1 Hour).wav");
           sp.newSound("type", "typewriter-1.wav");
+          sp.newSound("breath", "breath.wav");
           sp.setVolume("type", .3f);
         } catch (Exception e) {
             System.out.println(e);

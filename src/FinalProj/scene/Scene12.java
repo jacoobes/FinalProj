@@ -1,72 +1,77 @@
 package FinalProj.scene;
 
 import FinalProj.Game;
-import FinalProj.components.ChoiceButton;
-import FinalProj.utils.ResourceLoader;
-import FinalProj.utils.TextEmitter;
+import FinalProj.components.TextBox;
+import FinalProj.utils.*;
 import FinalProj.utils.events.Event;
 import basicgraphics.BasicContainer;
 
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
 
+import static java.awt.GridBagConstraints.SOUTH;
+
 public class Scene12 extends SceneAlpha {
-    private final ChoiceButton c1 = new ChoiceButton("Look back").addFont(getGameFont(20f));
-    private final ChoiceButton c2 = new ChoiceButton("Ignore it").addFont(getGameFont(20f));
-    public Scene12(ResourceLoader rl) {
-        super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setOpaque(false);
-        JTextPane textBox = new JTextPane();
-        textBox.setOpaque(false);
-        textBox.setForeground(Color.LIGHT_GRAY);
-        textBox.setFont(getGameFont(20f));
-        StyledDocument doc = textBox.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+    private final JButton next = new JButton(">");
+    public Scene12(ResourceLoader rl)
+    {
+        super(rl, new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage()));
+        var tutFont = getGameFont(20f);
+
+        JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
-        textBox.setEditable(false);
-        var text = """
-               Screams pierce the sky.
-               You continue to run in a panic.
-               """;
+        var text = String.format("""
+            A shout from a hill.
+            You look at the dark figurine crying for help.
+            You take a step back, looking the opposite direction.
+            
+            "Please... %s"
+            The shouting gets closer, and you run.
+            """,rl.getName());
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
 
-        c1.addActionListener(e -> {
-            rl.getMyProfile(true).addGuilt(10);
-            Game.transitionScene(this, Scene13.class.getName());
-            BasicContainer scene6 = new Scene13(rl);
-            rl.getFrame().getContentPane().add(scene6, Scene13.class.getName());
-        });
-        c2.addActionListener(e -> {
-            rl.getMyProfile(true).addGuilt(20);
-            BasicContainer scene6 = new Scene14(rl);
-            rl.getFrame().getContentPane().add(scene6, Scene14.class.getName());
-            Game.transitionScene(this, Scene14.class.getName());
-        });
-        var narrator = new Timer(75, txtEmit);
-        narrator.start();
+        var gbc = new GridBagConstraints();
+        gbc.gridy = SOUTH;
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weightx = 5;
-        gbc.gridx = GridBagConstraints.CENTER;
-        getMainBGround().add(textBox,gbc);
-        buttonPanel.add(c1);
-        buttonPanel.add(c2);
-        gbc.gridy = 3;
-        getMainBGround().add(buttonPanel, gbc);
+        next.setFont(tutFont);
+        next.addActionListener(e -> {
+            sp.stop("type");
+            BasicContainer scene4 = new Scene13(rl);
+            rl.getFrame().getContentPane().add(scene4, Scene13.class.getName());
+            //transition
+            Game.transitionScene(this, Scene13.class.getName());
+            //request focus
+            scene4.requestFocus();
+        });
+
+        var narrate = new Timer(75, txtEmit);
+        try {
+            sp.loop("type",-1);
+        } catch ( Exception e)
+        {
+            System.out.println(e);
+        }
+        getMainBGround().add(textBox);
+        getMainBGround().add(next, gbc);
+        narrate.start();
         rl.getFrame().jf.pack();
     }
 
     @Override
     public void update(Event<Boolean> event) {
-        c1.toggleVis();
-        c2.toggleVis();
+        if(event.getState())
+        {
+            sp.stop("type");
+            var showButton = new Timer(2000, e -> {
+                System.out.println("Scene3 has finished");
+                next.setVisible(true);
+                next.requestFocus();
+            });
+            showButton.setRepeats(false);
+            showButton.start();
+
+        }
     }
 }

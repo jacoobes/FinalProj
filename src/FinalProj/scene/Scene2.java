@@ -22,8 +22,6 @@ import static FinalProj.utils.ResourceLoader.*;
 public class Scene2 extends SceneAlpha {
     private static final Publisher<String> pub = new Publisher<>();
     private final ChoiceButton next = new ChoiceButton(">");
-    private final SpriteComponent sc = new SpriteComponent();
-    private final MC joe = new MC(sc);
     private static final HashMap<Integer, Integer> resolveMap = new HashMap<>();
     private final SemiTransparentTextField speechBubble = new SemiTransparentTextField(getGameFont(20f));
     static
@@ -49,8 +47,7 @@ public class Scene2 extends SceneAlpha {
 
     public Scene2(ResourceLoader rl) {
         super(rl, new ImageIcon(rl.getPicture("happy").resize(1.5f).getImage()));
-        sc.setPreferredSize(new Dimension(300, 600));
-        Clock.addTask(joe.animate());
+        Clock.addTask(mainCharac.animate());
         if(!sp.isPlaying("happy"))
         {
             try
@@ -82,7 +79,6 @@ public class Scene2 extends SceneAlpha {
         textPanel.add(speechBubble, gbc);
         textPanel.add(next, gbc);
 
-        speechBubble.setForeground(Color.darkGray);
 
         textPanel.setVisible(false);
         sc.setVisible(false);
