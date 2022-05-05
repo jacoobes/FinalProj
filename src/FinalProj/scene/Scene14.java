@@ -2,71 +2,72 @@ package FinalProj.scene;
 
 import FinalProj.Game;
 import FinalProj.components.ChoiceButton;
+import FinalProj.components.TextBox;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.TextEmitter;
 import FinalProj.utils.events.Event;
 import basicgraphics.BasicContainer;
-
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
+import static java.awt.GridBagConstraints.CENTER;
+import static java.awt.GridBagConstraints.SOUTH;
 
+//Black scene and transition to game
 public class Scene14 extends SceneAlpha {
-    private final ChoiceButton c1 = new ChoiceButton("Look back").addFont(getGameFont(20f));
-    private final ChoiceButton c2 = new ChoiceButton("Ignore it").addFont(getGameFont(20f));
-    public Scene14(ResourceLoader rl) {
-        super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setOpaque(false);
-        JTextPane textBox = new JTextPane();
-        textBox.setOpaque(false);
-        textBox.setForeground(Color.LIGHT_GRAY);
-        textBox.setFont(getGameFont(20f));
-        StyledDocument doc = textBox.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+    private final ChoiceButton next = new ChoiceButton(">").addFont(getGameFont(20f));
+    public Scene14(ResourceLoader rl)
+    {
+        super(rl,new ImageIcon(rl.getPicture("blackground").getImage()) );
+        var tutFont = getGameFont(20f);
+
+        super.setPreferredSize(getMainBGround().getPreferredSize());
+        JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
-        textBox.setEditable(false);
-        var text = """
-               Screams pierce the sky.
-               You continue to run in a panic.
-               """;
+        var text ="      I couldn't help her. I swear. \n"
+                + "      They were coming for us!\n"
+                + "      It's not my fault....\n";
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
 
-        c1.addActionListener(e -> {
-            rl.getMyProfile(true).addGuilt(10);
+        var gbc = new GridBagConstraints();
+        gbc.gridy = SOUTH;
+        gbc.gridx = CENTER;
+        next.setFont(tutFont);
+        next.setVisible(false);
+        next.addActionListener(e -> {
+            sp.stop("type");
+            BasicContainer scene5 = new Scene15(rl);
+            rl.getFrame().getContentPane().add(scene5, Scene15.class.getName());
+            //transition
             Game.transitionScene(this, Scene15.class.getName());
-            BasicContainer scene6 = new Scene15(rl);
-            rl.getFrame().getContentPane().add(scene6, Scene15.class.getName());
+            //request focus
+            scene5.requestFocus();
         });
-        c2.addActionListener(e -> {
-            rl.getMyProfile(true).addGuilt(20);
-            BasicContainer scene6 = new Scene16(rl);
-            rl.getFrame().getContentPane().add(scene6, Scene16.class.getName());
-            Game.transitionScene(this, Scene16.class.getName());
-        });
-        var narrator = new Timer(75, txtEmit);
-        narrator.start();
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weightx = 5;
-        gbc.gridx = GridBagConstraints.CENTER;
-        getMainBGround().add(textBox,gbc);
-        buttonPanel.add(c1);
-        buttonPanel.add(c2);
-        gbc.gridy = 3;
-        getMainBGround().add(buttonPanel, gbc);
+        var narrate = new Timer(75, txtEmit);
+        var gbcTxtBox = new GridBagConstraints();
+        gbcTxtBox.gridx = CENTER;
+        getMainBGround().add(textBox, gbcTxtBox);
+        getMainBGround().add(next, gbc);
+        narrate.start();
         rl.getFrame().jf.pack();
+        try {
+            sp.loop("type",-1);
+        } catch ( Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     @Override
     public void update(Event<Boolean> event) {
-        c1.toggleVis();
-        c2.toggleVis();
+
+        if(event.getState())
+        {
+            sp.stop("type");
+            System.out.println("Scene 4 finished");
+            next.setVisible(true);
+        }
     }
 }

@@ -108,10 +108,7 @@ public class Scene7 extends SceneAlpha {
         try
         {
           sp.stop("type");
-        } catch (Exception e)
-        {
-            System.out.println(e);
-        }
+        } catch (Exception ignored) {}
         next.toggleVis();
         buttonClicks++;
         if(buttonClicks > 1)

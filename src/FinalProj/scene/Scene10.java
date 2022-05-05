@@ -1,80 +1,65 @@
 package FinalProj.scene;
 
 import FinalProj.Game;
-import FinalProj.components.TextBox;
-import FinalProj.utils.*;
+import FinalProj.components.ChoiceButton;
+import FinalProj.utils.ResourceLoader;
+import FinalProj.utils.TextEmitter;
 import FinalProj.utils.events.Event;
 import basicgraphics.BasicContainer;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
-import static java.awt.GridBagConstraints.SOUTH;
 
 public class Scene10 extends SceneAlpha {
-    private final JButton next = new JButton(">");
+    private final ChoiceButton c1 = new ChoiceButton("Look back").addFont(getGameFont(20f));
+    public Scene10(ResourceLoader rl)
+    {
+        super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
 
-    public Scene10(ResourceLoader rl) {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
 
-        super(rl, new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage()));
-        try {
-            sp.loop("brown",-1);
-            sp.setVolume("brown", .3f);
-        } catch (Throwable e) {
-            System.out.println(e);
-        }
-        var tutFont = getGameFont(20f);
-        JTextArea textBox = new TextBox(tutFont);
-        textBox.setVisible(true);
-        var text = String.format("""
-               Help me...  Please... %s
-               I never meant it. I promise.
-               Help me out will you?
-               """, rl.getName());
+        var textBox = new JTextPane() {
+            public void init()
+            {
+                setOpaque(false);
+                setForeground(Color.LIGHT_GRAY);
+                setFont(getGameFont(20f));
+                StyledDocument doc = getStyledDocument();
+                SimpleAttributeSet center = new SimpleAttributeSet();
+                StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+                doc.setParagraphAttributes(0, doc.getLength(), center, false);
+                setVisible(true);
+                setEditable(false);
+            }
+        };
 
+        textBox.init();
+        var text = """
+               Screams pierce the sky.
+               You continue to run in a panic.
+               """;
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
 
-        var gbc = new GridBagConstraints();
-         gbc.gridy = SOUTH;
+        var narrator = new Timer(75, txtEmit);
+        narrator.start();
 
-      // make sure to uncomment in game
-     //   next.setVisible(false);
-        next.setFont(tutFont);
-        next.addActionListener(e -> {
-            sp.stop("type");
-            BasicContainer scene9 = new Scene8(rl);
-            rl.getFrame().getContentPane().add(scene9, Scene8.class.getName());
-            //transition
-            Game.transitionScene(this, Scene8.class.getName());
-            scene9.requestFocus();
-        });
-        var narrate = new Timer(50, txtEmit);
-        narrate.start();
-        try {
-         sp.loop("type",4);
-        } catch (Throwable e)
-        {
-            System.out.println(e);
-        }
-
-        getMainBGround().add(textBox);
-        getMainBGround().add(next, gbc);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 5;
+        gbc.gridx = GridBagConstraints.CENTER;
+        getMainBGround().add(textBox,gbc);
+        buttonPanel.add(c1);
+        gbc.gridy = 3;
+        getMainBGround().add(buttonPanel, gbc);
         rl.getFrame().jf.pack();
     }
-
     @Override
     public void update(Event<Boolean> event) {
-        sp.stop("type");
-        if(event.getState())
-        {
-            var showButton = new Timer(2000, e -> {
-                System.out.println("Scene10 has finished");
-                next.setVisible(true);
-            });
-            showButton.setRepeats(false);
-            showButton.start();
-        }
-    }
 
+    }
 }

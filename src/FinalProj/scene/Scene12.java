@@ -17,42 +17,38 @@ public class Scene12 extends SceneAlpha {
     {
         super(rl, new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage()));
         var tutFont = getGameFont(20f);
-
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
-        var text = String.format("""
-            A shout from a hill.
-            You look at the dark figurine crying for help.
-            You take a step back, looking the opposite direction.
-            
-            "Please... %s"
-            The shouting gets closer, and you run.
-            """,rl.getName());
+
+        var text = """
+            Don't leave me. We made a promise, remember?
+            Help me.... I don't want to die here.
+            """;
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
 
         var gbc = new GridBagConstraints();
         gbc.gridy = SOUTH;
-
+        // make sure to uncomment in game
+        //next.setVisible(false);
         next.setFont(tutFont);
         next.addActionListener(e -> {
             sp.stop("type");
-            BasicContainer scene4 = new Scene13(rl);
-            rl.getFrame().getContentPane().add(scene4, Scene13.class.getName());
+            BasicContainer scene3 = new Scene13(rl);
+            rl.getFrame().getContentPane().add(scene3, Scene13.class.getName());
             //transition
             Game.transitionScene(this, Scene13.class.getName());
             //request focus
-            scene4.requestFocus();
+            scene3.requestFocus();
         });
-
-        var narrate = new Timer(75, txtEmit);
         try {
             sp.loop("type",-1);
-        } catch ( Exception e)
+        } catch (Throwable e)
         {
             System.out.println(e);
         }
+        var narrate = new Timer(75, txtEmit);
         getMainBGround().add(textBox);
         getMainBGround().add(next, gbc);
         narrate.start();
@@ -65,7 +61,7 @@ public class Scene12 extends SceneAlpha {
         {
             sp.stop("type");
             var showButton = new Timer(2000, e -> {
-                System.out.println("Scene3 has finished");
+                System.out.println("Scene2 has finished");
                 next.setVisible(true);
                 next.requestFocus();
             });

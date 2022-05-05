@@ -4,7 +4,9 @@ import FinalProj.components.WindowCloseListener;
 import FinalProj.scene.*;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.SceneTracker;
+import FinalProj.utils.SoundPlayer;
 import basicgraphics.*;
+import edu.lsu.cct.piraha.Ex;
 
 import javax.swing.*;
 import java.awt.*;

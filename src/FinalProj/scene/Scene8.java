@@ -51,16 +51,6 @@ public class Scene8 extends SceneAlpha {
         {
             System.out.println(e);
         }
-        if(!sp.isPlaying("brown"))
-        {
-            try
-            {
-                sp.loop("brown",-1);
-            } catch (Exception e)
-            {
-                System.out.println(e);
-            }
-        }
         var choicePanel = new QuadChoicePanel(new ChoiceButton[] {
                 new ChoiceButton(S8C0).addFont(getGameFont(20f)),
                 new ChoiceButton(S8C1).addFont(getGameFont(20f)),
@@ -68,10 +58,11 @@ public class Scene8 extends SceneAlpha {
                 new ChoiceButton(S8C3).addFont(getGameFont(20f))
         });
         var choiceButtons = choicePanel.getButtons();
-        Scene9 sc9 = new Scene9(resourceLoader);
-        resourceLoader.getFrame().getContentPane().add(sc9,Scene9.class.getName());
+
 
         next.addActionListener(e -> {
+            Scene9 sc9 = new Scene9(resourceLoader);
+            resourceLoader.getFrame().getContentPane().add(sc9,Scene9.class.getName());
             Game.transitionScene(this, Scene9.class.getName());
         });
         pub.addSubscriber(rl.getButtonDialogue());
