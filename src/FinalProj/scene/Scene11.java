@@ -13,7 +13,7 @@ import static java.awt.GridBagConstraints.SOUTH;
 public class Scene11 extends SceneAlpha {
     private final JButton next = new JButton(">");
 
-    public Scene11(ResourceLoader rl) {
+    public Scene11(ResourceLoader rl, boolean hasEnoughResolve) {
 
         super(rl, new ImageIcon(rl.getPicture("textScene").resize(1.5f).getImage()));
         try {
@@ -25,11 +25,14 @@ public class Scene11 extends SceneAlpha {
         var tutFont = getGameFont(20f);
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
-        var text = String.format("""
+        var text = hasEnoughResolve ? String.format("""
                Help me...  Please... %s
-               I never meant it. I promise.
-               Help me out will you?
-               """, rl.getName());
+               My love, help me please....
+               """, rl.getName())  : """
+                You fight the breathing man.
+                               
+                "LET GO!"
+                 """;
 
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
@@ -44,7 +47,7 @@ public class Scene11 extends SceneAlpha {
         next.addActionListener(e -> {
             sp.stop("type");
             BasicContainer scene12 = new Scene12(rl);
-            rl.getFrame().getContentPane().add(scene12, Scene8.class.getName());
+            rl.getFrame().getContentPane().add(scene12, Scene12.class.getName());
             //transition
             Game.transitionScene(this, Scene12.class.getName());
             scene12.requestFocus();

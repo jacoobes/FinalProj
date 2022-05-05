@@ -22,10 +22,9 @@ public class Scene13 extends SceneAlpha {
         textBox.setVisible(true);
         var text = String.format("""
             You look at the dark figurine crying for help.
-            You take a step back, looking the opposite direction.
+            You step back, looking the opposite direction.
             
             "Please... %s"
-            The shouting gets closer, and you run.
             """,rl.getName());
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)

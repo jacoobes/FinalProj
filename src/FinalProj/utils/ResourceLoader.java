@@ -99,7 +99,8 @@ public class ResourceLoader{
           sp.newSound("brown", "Super Deep Brown Noise (1 Hour).wav");
           sp.newSound("type", "typewriter-1.wav");
           sp.newSound("breath", "breath.wav");
-          sp.setVolume("type", .3f);
+          sp.setVolume("breath", 1f);
+          sp.setVolume("type", .2f);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -5,8 +5,6 @@ import FinalProj.components.ChoiceButton;
 import FinalProj.utils.ResourceLoader;
 import FinalProj.utils.TextEmitter;
 import FinalProj.utils.events.Event;
-import basicgraphics.BasicContainer;
-
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -14,7 +12,7 @@ import javax.swing.text.StyledDocument;
 import java.awt.*;
 
 public class Scene10 extends SceneAlpha {
-    private final ChoiceButton c1 = new ChoiceButton("Look back").addFont(getGameFont(20f));
+    private final ChoiceButton c1 = new ChoiceButton(">").addFont(getGameFont(20f));
     public Scene10(ResourceLoader rl)
     {
         super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
@@ -36,16 +34,23 @@ public class Scene10 extends SceneAlpha {
                 setEditable(false);
             }
         };
-
         textBox.init();
-        var text = """
-               Screams pierce the sky.
-               You continue to run in a panic.
-               """;
+
+        var text = String.format("""
+               "It comes and goes.." he breathes.
+               
+               %s, %s, he has my hand. HELP.
+               PLEASE..
+               """,rl.getName(),rl.getName());
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
 
+        c1.addActionListener(e -> {
+            var sc11 = new Scene11(rl, rl.getMyProfile(true).resolve == 60);
+            rl.getFrame().getContentPane().add(sc11,Scene11.class.getName());
+            Game.transitionScene(this, Scene11.class.getName());
+        });
         var narrator = new Timer(75, txtEmit);
         narrator.start();
 
@@ -60,6 +65,7 @@ public class Scene10 extends SceneAlpha {
     }
     @Override
     public void update(Event<Boolean> event) {
+        c1.toggleVis();
 
     }
 }

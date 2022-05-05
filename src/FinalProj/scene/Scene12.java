@@ -30,8 +30,7 @@ public class Scene12 extends SceneAlpha {
 
         var gbc = new GridBagConstraints();
         gbc.gridy = SOUTH;
-        // make sure to uncomment in game
-        //next.setVisible(false);
+        next.setVisible(false);
         next.setFont(tutFont);
         next.addActionListener(e -> {
             sp.stop("type");

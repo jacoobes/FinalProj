@@ -12,7 +12,6 @@ import java.awt.*;
 import static java.awt.GridBagConstraints.CENTER;
 import static java.awt.GridBagConstraints.SOUTH;
 
-//Black scene and transition to game
 public class Scene14 extends SceneAlpha {
     private final ChoiceButton next = new ChoiceButton(">").addFont(getGameFont(20f));
     public Scene14(ResourceLoader rl)
@@ -24,7 +23,7 @@ public class Scene14 extends SceneAlpha {
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
         var text ="      I couldn't help her. I swear. \n"
-                + "      They were coming for us!\n"
+                + "      It was coming for us!\n"
                 + "      It's not my fault....\n";
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
