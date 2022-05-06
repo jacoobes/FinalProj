@@ -93,6 +93,8 @@ public class ResourceLoader{
         ImageMap.put("happy", happy);
         var sunset = new Picture("sunset.png");
         ImageMap.put("sunset", sunset);
+        var cabin = new Picture("cabin.png");
+        ImageMap.put("cabin", cabin);
         try {
           sp.newSound("click","zapsplat_multimedia_button_click_fast_short_003_79287.wav");
           sp.newSound("happy", "happyscenes.wav");
@@ -141,5 +143,6 @@ public class ResourceLoader{
         }
         return backupData;
     }
+
 
 }

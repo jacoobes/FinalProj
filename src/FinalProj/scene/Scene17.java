@@ -18,6 +18,18 @@ public class Scene17 extends SceneAlpha {
     public Scene17(ResourceLoader rl) {
         super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
         JTextArea textBox = new TextBox(getGameFont(20f));
+        if(!sp.isPlaying("type"))
+        {
+            try {
+                sp.loop("brown",-1);
+                sp.loop("type",-1);
+            } catch (Throwable e)
+            {
+                System.out.println(e);
+            }
+        }
+        textBox.setVisible(true);
+        textBox.setOpaque(false);
         textBox.setForeground(Color.LIGHT_GRAY);
 
         var text = String.format("""
@@ -30,7 +42,8 @@ public class Scene17 extends SceneAlpha {
                 .addSub(this);
 
         cb.addActionListener(e -> {
-            rl.getMyProfile(true).addGuilt(50);
+            var sc18 = new Scene18(rl);
+            rl.getFrame().getContentPane().add(sc18, Scene18.class.getName());
             Game.transitionScene(this, Scene18.class.getName());
         });
         var narrator = new Timer(50, txtEmit);
@@ -49,6 +62,7 @@ public class Scene17 extends SceneAlpha {
         if(event.getState())
         {
             cb.toggleVis();
+            sp.stop("type");
         }
     }
 }

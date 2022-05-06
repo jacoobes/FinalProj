@@ -47,10 +47,7 @@ public class Scene8 extends SceneAlpha {
         {
           sp.setVolume("breath",.1f);
           sp.loop("breath",-1);
-        } catch (Exception e)
-        {
-            System.out.println(e);
-        }
+        } catch (Exception ignored) {}
         var choicePanel = new QuadChoicePanel(new ChoiceButton[] {
                 new ChoiceButton(S8C0).addFont(getGameFont(20f)),
                 new ChoiceButton(S8C1).addFont(getGameFont(20f)),

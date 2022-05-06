@@ -14,7 +14,8 @@ public class MC extends Sprite {
     {
         super(sc);
         for (int i = 0; i < frames.length; i++) {
-            frames[i] = new Picture(String.format("mc_talking-%s.png", i));
+            frames[i] = new Picture(String.format("mc_talking-%s.png",i));
+            frames[i].transparentWhite();
         }
         setPicture(frames[0]);
     }

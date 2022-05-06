@@ -18,18 +18,34 @@ public class Scene15 extends SceneAlpha {
     private final ChoiceButton c2 = new ChoiceButton("Ignore it").addFont(getGameFont(20f));
     public Scene15(ResourceLoader rl) {
         super(rl, new ImageIcon(rl.getPicture("blackground").getImage()));
+        if(!sp.isPlaying("type"))
+        {
+            try {
+                sp.loop("brown",-1);
+                sp.loop("type",-1);
+            } catch (Throwable e)
+            {
+                System.out.println(e);
+            }
+        }
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
-        JTextPane textBox = new JTextPane();
-        textBox.setOpaque(false);
-        textBox.setForeground(Color.LIGHT_GRAY);
-        textBox.setFont(getGameFont(20f));
-        StyledDocument doc = textBox.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
-        textBox.setVisible(true);
-        textBox.setEditable(false);
+        var textBox = new JTextPane() {
+            public void init() {
+                setOpaque(false);
+                setForeground(Color.LIGHT_GRAY);
+                setFont(getGameFont(20f));
+                StyledDocument doc = getStyledDocument();
+                SimpleAttributeSet center = new SimpleAttributeSet();
+                StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+                doc.setParagraphAttributes(0, doc.getLength(), center, false);
+                setVisible(true);
+                setEditable(false);
+            }
+
+        };
+        textBox.init();
+
         var text = """
                Screams pierce the sky.
                You continue to run in a panic.
@@ -39,13 +55,13 @@ public class Scene15 extends SceneAlpha {
                 .addSub(this);
 
         c1.addActionListener(e -> {
-            rl.getMyProfile(true).addGuilt(10);
-            Game.transitionScene(this, Scene16.class.getName());
+            rl.getMyProfile(true).addGuilt(30);
             BasicContainer scene6 = new Scene16(rl);
             rl.getFrame().getContentPane().add(scene6, Scene16.class.getName());
+            Game.transitionScene(this, Scene16.class.getName());
         });
         c2.addActionListener(e -> {
-            rl.getMyProfile(true).addGuilt(20);
+            rl.getMyProfile(true).addGuilt(5);
             BasicContainer scene6 = new Scene17(rl);
             rl.getFrame().getContentPane().add(scene6, Scene17.class.getName());
             Game.transitionScene(this, Scene17.class.getName());
@@ -66,6 +82,7 @@ public class Scene15 extends SceneAlpha {
 
     @Override
     public void update(Event<Boolean> event) {
+        sp.stop("type");
         c1.toggleVis();
         c2.toggleVis();
     }

@@ -22,9 +22,22 @@ public class Scene14 extends SceneAlpha {
         super.setPreferredSize(getMainBGround().getPreferredSize());
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
-        var text ="      I couldn't help her. I swear. \n"
-                + "      It was coming for us!\n"
-                + "      It's not my fault....\n";
+        boolean hasEnoughResolve = rl.getMyProfile(true).resolve >= 60;
+        var text = !hasEnoughResolve ?
+                "      I couldn't help her. I swear. \n"
+                + "    It was coming for us!\n"
+                + "    It's not my fault....\n"
+                : """
+                The man hollers as the stick gets impaled.
+                
+                "Let's go," you said to her.
+                
+                You grab her, putting her entire weight onto your back,
+                A foot dangles from behind you.
+                
+                You walk away as you hear howling behind you,
+                slowly fading away in the distance.
+                """;
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);
@@ -36,12 +49,20 @@ public class Scene14 extends SceneAlpha {
         next.setVisible(false);
         next.addActionListener(e -> {
             sp.stop("type");
-            BasicContainer scene5 = new Scene15(rl);
-            rl.getFrame().getContentPane().add(scene5, Scene15.class.getName());
-            //transition
-            Game.transitionScene(this, Scene15.class.getName());
-            //request focus
-            scene5.requestFocus();
+            if(!hasEnoughResolve)
+            {
+                BasicContainer scene5 = new Scene15(rl);
+                rl.getFrame().getContentPane().add(scene5, Scene15.class.getName());
+                scene5.requestFocus();
+                Game.transitionScene(this, Scene15.class.getName());
+            }
+            else
+            {
+                BasicContainer happyEnding = new Scene19(rl);
+                rl.getFrame().getContentPane().add(happyEnding, Scene19.class.getName());
+                happyEnding.requestFocus();
+                Game.transitionScene(this, Scene19.class.getName());
+            }
         });
 
         var narrate = new Timer(75, txtEmit);
@@ -65,7 +86,7 @@ public class Scene14 extends SceneAlpha {
         if(event.getState())
         {
             sp.stop("type");
-            System.out.println("Scene 4 finished");
+            System.out.println("Scene 14 finished");
             next.setVisible(true);
         }
     }

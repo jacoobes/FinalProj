@@ -20,12 +20,16 @@ public class Scene13 extends SceneAlpha {
 
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
-        var text = String.format("""
+        boolean hasEnoughResolve = rl.getMyProfile(true).resolve >= 60;
+        var text = !hasEnoughResolve ? String.format("""
             You look at the dark figurine crying for help.
             You step back, looking the opposite direction.
             
             "Please... %s"
-            """,rl.getName());
+            """,rl.getName()): """
+                LET GO! You find a stick on the ground,
+                taking it and puncturing its eyes.
+                """ ;
         var txtEmit = new TextEmitter(text)
                 .setJText(textBox)
                 .addSub(this);

@@ -1,7 +1,7 @@
 !!FinalProj.utils.YamlParser$Data
 _fp: src/FinalProj/resources/database/profile1.yaml
-choices: [We first met here., I will care for you always., Look at him.]
-guilt: 0
-name: d
-resolve: 0
-savedScene: Scene10
+choices: [We first met here., I will protect you from anything., 'Say : excuse me?']
+guilt: 45
+name: poba
+resolve: 40
+savedScene: Scene17

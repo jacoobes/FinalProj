@@ -31,13 +31,15 @@ public class WindowCloseListener implements WindowListener {
         );
         if (res == 0)
         {
-            try
-            {
-                rl.yamlizer.dump(curProf);
-            } catch (IOException ex)
-            {
-                ex.printStackTrace();
-            }
+             try
+                {
+                    rl.yamlizer.dump(curProf);
+                } catch (IOException ex)
+                {
+                    ex.printStackTrace();
+                }
+
+
         }
         else
         {

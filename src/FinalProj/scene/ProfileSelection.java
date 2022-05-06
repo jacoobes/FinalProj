@@ -58,37 +58,37 @@ public class ProfileSelection extends SceneAlpha {
                     }
                 } else
                 {
-                    try
-                    {
-                        rl.profileSub().update(new CurrentProfileSelectEvent(d));
+                        try
+                        {
+                            rl.profileSub().update(new CurrentProfileSelectEvent(d));
 
-                        @SuppressWarnings("unchecked")
-                        Constructor<? extends SceneAlpha> cons = (Constructor<? extends SceneAlpha>)
-                                Class
+                             @SuppressWarnings("unchecked")
+                            Constructor<? extends SceneAlpha> cons = (Constructor<? extends SceneAlpha>)
+                                    Class
                                         .forName("FinalProj.scene." + d.savedScene)
                                         .getConstructor(ResourceLoader.class);
-                        var scene = cons.newInstance(rl);
-                        SceneTracker.movePointer(
-                                Integer.parseInt(d.savedScene.substring("Scene".length())) -1
-                        );
-                        System.out.println("Teleporting to " + d.savedScene);
-                        rl.getFrame().getContentPane().add(scene, d.savedScene);
-                    } catch (
-                            InstantiationException
+                            var scene = cons.newInstance(rl);
+                            SceneTracker.movePointer(
+                                    Integer.parseInt(d.savedScene.substring("Scene".length())) -1
+                            );
+                            System.out.println("Teleporting to " + d.savedScene);
+                            rl.getFrame().getContentPane().add(scene, d.savedScene);
+                        } catch (
+                                InstantiationException
                                     | IllegalAccessException
                                     | ClassNotFoundException
                                     | NoSuchMethodException
                                     | InvocationTargetException ex
-                    )
-                    {
-                        ex.printStackTrace();
+                        )
+                        {
+                            ex.printStackTrace();
+                        }
+                        Game.transitionScene(this, d.savedScene);
+                        if (d.name == null)
+                        {
+                            publisher.notifySubs(new CurrentProfileSelectEvent(d));
+                        }
                     }
-                    Game.transitionScene(this, d.savedScene);
-                }
-                if (d.name == null)
-                {
-                    publisher.notifySubs(new CurrentProfileSelectEvent(d));
-                }
             });
             cb.setFont(getGameFont(20f));
             cb.setVisible(true);

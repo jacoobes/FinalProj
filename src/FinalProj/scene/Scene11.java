@@ -25,11 +25,11 @@ public class Scene11 extends SceneAlpha {
         var tutFont = getGameFont(20f);
         JTextArea textBox = new TextBox(tutFont);
         textBox.setVisible(true);
-        var text = hasEnoughResolve ? String.format("""
+        var text = !hasEnoughResolve ? String.format("""
                Help me...  Please... %s
                My love, help me please....
                """, rl.getName())  : """
-                You fight the breathing man.
+                You fight back.
                                
                 "LET GO!"
                  """;
@@ -42,7 +42,7 @@ public class Scene11 extends SceneAlpha {
          gbc.gridy = SOUTH;
 
       // make sure to uncomment in game
-     //   next.setVisible(false);
+        next.setVisible(false);
         next.setFont(tutFont);
         next.addActionListener(e -> {
             sp.stop("type");
