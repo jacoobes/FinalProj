@@ -2,6 +2,6 @@
 _fp: src/FinalProj/resources/database/profile1.yaml
 choices: []
 guilt: 0
-name: ~
+name: null
 resolve: 0
-savedScene: Scene0
+savedScene: null

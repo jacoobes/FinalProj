@@ -8,6 +8,7 @@ import FinalProj.utils.SceneTracker;
 import FinalProj.utils.YamlParser;
 import FinalProj.utils.events.CurrentProfileSelectEvent;
 import FinalProj.utils.events.Event;
+import edu.lsu.cct.piraha.Ex;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +40,40 @@ public class ProfileSelection extends SceneAlpha {
             jl.setFont(getGameFont(20f));
             jl.setForeground(Color.BLACK);
             jps[i].add(jl);
+            ChoiceButton del = new ChoiceButton("Delete");
+            del.addActionListener(e -> {
+                if(d.name == null)
+                {
+                     JOptionPane.showMessageDialog(
+                            this,
+                            "You cannot delete a new profile!"
+                    );
+                     return;
+                }
+                int res = JOptionPane.showConfirmDialog(
+                        this,
+                        "Are you sure you want to delete this profile?",
+                        null,
+                        JOptionPane.YES_NO_OPTION
+                );
+                if(res == 0)
+                {
+                    try
+                    {
+                      var data = new YamlParser.Data();
+                      data._fp = d._fp;
+                      resourceLoader.yamlizer.dump(data);
+                    } catch (Exception ex) {}
+                    JOptionPane.showMessageDialog(this,
+                            """
+                                    Restart Guilt to get the changes.
+                                    """);
+                }
 
+            });
+            del.setFont(getGameFont(20f));
+            del.setVisible(true);
+            jps[i].add(del);
             ChoiceButton cb = new ChoiceButton("Select");
             cb.addActionListener(e -> {
                 if (d.name == null)
