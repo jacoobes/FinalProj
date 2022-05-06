@@ -24,6 +24,7 @@ public class Scene19 extends SceneAlpha {
     public Scene19(ResourceLoader rl)
     {
         super(rl, new ImageIcon(rl.getPicture("cabin").resize(1.5f).getImage()));
+        sp.stop("breath");
         try {
             sp.loop("happy",-1);
         } catch (Exception e) {}
