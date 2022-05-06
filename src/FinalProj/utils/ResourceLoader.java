@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * Main loading class to manage all outgoing and incoming resources from scenes
+ */
 public class ResourceLoader{
 
     // these constants are choices for scenes. the notation for variables =
@@ -28,20 +31,24 @@ public class ResourceLoader{
     public static final String S8C2 = "Say : Ignore him, dear.";
     public static final String S8C3 = "Look at him.";
 
+    //Adds a choice made by the user to the current profile
     private final Subs<String> buttonDialogue = event -> {
         String choice = event.getState();
         System.out.printf("Added a current choice to player %s\n", choice);
         this.getMyProfile(true).addChoice(choice);
     };
-
+    //Sets the name of the currentProfileUser.
     private final Subs<String> nameSub = event -> {
         String name = event.getState();
         System.out.printf("Set the player's name to %s\n", name);
         this.myProfile.name = name;
     };
 
+
     private YamlParser.Data myProfile;
     private YamlParser.Data backupData;
+
+    //Loads the current profile.
     private final Subs<YamlParser.Data> currentProfile = event -> {
         YamlParser.Data myp = event.getState();
         System.out.println("Loaded : "+myp);
@@ -61,7 +68,6 @@ public class ResourceLoader{
     public ResourceLoader() {
         myProfile = null;
         backupData = null;
-        //Loading BitStream
         try {
             var location = new File("src/FinalProj/resources/fonts/Bitstream Vera Sans Mono Bold Nerd Font Complete Mono Windows Compatible.ttf");
             var f = Font.createFont(
@@ -130,6 +136,12 @@ public class ResourceLoader{
     {
         return this.myProfile.name;
     }
+
+    /**
+     *
+     * @param save - which profile to access, the current unsaved profile or the backup
+     * @return - YamlParser.Data
+     */
     public YamlParser.Data getMyProfile(boolean save)
     {
         if(save)

@@ -10,11 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Using external library : SnakeYaml
- */
+
 public class YamlParser {
 
+    /**
+     * Using external library : SnakeYaml
+     */
     private final Yaml yaml = new Yaml(new Constructor(Data.class));
     private List<Data> profiles = new ArrayList<>();
     public static class Data implements Cloneable

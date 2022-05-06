@@ -4,6 +4,10 @@ import FinalProj.utils.events.Event;
 
 import java.util.ArrayList;
 
+/**
+ * Publishers push event to subscribers when the notifySubs method is called.
+ * @param <T>
+ */
 public class Publisher<T> {
     private final ArrayList<Subs<T>> subscribers = new ArrayList<>();
 
