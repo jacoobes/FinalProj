@@ -35,13 +35,12 @@ public class Tutorial extends BasicContainer implements Subs<Boolean> {
         gbc.gridy = SOUTH;
         startGame.setVisible(false);
         startGame.setFont(tutFont);
-        //"""
-        //                For cinematic scenes, wait for the button to appear.
-        //                For choice boxes, click one of the buttons.
-        //                Every choice will affect the ending of the game."""
+
         String text = """
-        placeholder
-        """;
+        For cinematic scenes, wait for the button to appear.
+        For choice boxes, click one of the buttons.
+        Every choice will affect the ending of the game.
+        There are a possible of 3 endings. Choose wisely!""";
 
         var txtEmitter = new TextEmitter(text)
             .setJText(tutorialParagraph)
